@@ -4,7 +4,6 @@ const Motherboad = db.Motherboard;
 exports.populateDatabase = (rows) => {
   rows.forEach((data) => {
     let motherboard = {};
-    console.log(data);
     try {
       motherboard.addedDate = data[0];
       motherboard.assetId = data[1];
