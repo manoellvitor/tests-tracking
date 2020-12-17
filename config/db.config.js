@@ -4,7 +4,6 @@ const Sequelize = require('sequelize');
 const sequelize = new Sequelize({
   dialect: env.dialect,
   storage: env.storage,
-  operatorsAliases: false,
 
   pool: {
     max: env.pool.max,

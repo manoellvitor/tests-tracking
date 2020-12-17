@@ -1,5 +1,3 @@
-const { Sequelize } = require('sequelize/types');
-
 module.exports = (sequelize, Sequelize) => {
   const Motherboard = sequelize.define('motherboard', {
     id: {
@@ -8,7 +6,7 @@ module.exports = (sequelize, Sequelize) => {
       primaryKey: true,
     },
     addedDate: {
-      type: Sequelize.STRING,
+      type: Sequelize.DATEONLY,
     },
     assetId: {
       type: Sequelize.STRING,
@@ -17,7 +15,7 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING,
     },
     testedDate: {
-      type: Sequelize.STRING,
+      type: Sequelize.DATEONLY,
     },
     result: {
       type: Sequelize.STRING,

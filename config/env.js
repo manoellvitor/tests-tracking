@@ -1,6 +1,6 @@
 const env = {
   dialect: 'sqlite',
-  storage: '__dirname/hardware.sqlite',
+  storage: 'database/hardware.sqlite',
 
   pool: {
     max: 5,
@@ -11,6 +11,10 @@ const env = {
 
   server: {
     PORT: 3000,
+  },
+
+  filesPath: {
+    moboPath: 'C:/Users/2514164.JABIL/Desktop/TestedHardware/',
   },
 };
 
