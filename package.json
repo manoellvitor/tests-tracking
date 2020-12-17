@@ -1,0 +1,40 @@
+{
+  "name": "jabil-hardware",
+  "version": "1.0.0",
+  "description": "Application to get all data from Excel Sheets and show it in a user friendly way",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/manoellvitor/jabil-hardware.git"
+  },
+  "keywords": [
+    "Nodejs",
+    "RestAPI",
+    "Express",
+    "Tutorial",
+    "MySQL",
+    "PostgreSQL",
+    "Bootstrap",
+    "framework"
+  ],
+  "author": "Manoel Vitor Nascimento Lopes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/manoellvitor/jabil-hardware/issues"
+  },
+  "homepage": "https://github.com/manoellvitor/jabil-hardware#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
+  "dependencies": {
+    "body-parse": "^0.1.0",
+    "express": "^4.17.1",
+    "helmet": "^4.2.0",
+    "morgan": "^1.10.0",
+    "sequelize": "^6.3.5",
+    "sqlite": "^4.0.18"
+  }
+}
