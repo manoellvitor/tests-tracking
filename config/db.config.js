@@ -1,6 +1,6 @@
 const env = require('./env.js');
-
 const Sequelize = require('sequelize');
+
 const sequelize = new Sequelize({
   dialect: env.dialect,
   storage: env.storage,
