@@ -25,7 +25,7 @@ app.use(morgan('tiny'));
 app.use(helmet());
 app.use('/', router);
 
-const PORT = env.server.PORT || 3000;
+const PORT = env.server.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Server Running at - http://localhost:${PORT}`);

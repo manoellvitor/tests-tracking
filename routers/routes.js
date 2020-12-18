@@ -11,6 +11,10 @@ router.get('/', (req, res) => {
   res.sendFile(path + 'index.html');
 });
 
+router.get('/motherboards', (req, res) => {
+  res.sendFile(path + 'motherboards.html');
+});
+
 router.get('/api/v1.0/getallmotherboards', moboController.getAllMotherboards);
 
 module.exports = router;

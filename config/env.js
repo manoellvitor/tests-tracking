@@ -10,7 +10,7 @@ const env = {
   },
 
   server: {
-    PORT: 3000,
+    PORT: 5000,
   },
 
   filesPath: {
