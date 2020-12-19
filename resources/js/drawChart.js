@@ -32,6 +32,10 @@ function drawChart(mobos) {
       ],
     },
     options: {
+      title: {
+        display: true,
+        text: 'Overall Number of Hardware Tested.',
+      },
       scales: {
         yAxes: [
           {

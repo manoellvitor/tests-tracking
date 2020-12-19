@@ -1,31 +1,51 @@
-// Wait for the page to load first
 window.onload = function () {
-  //Get a reference to the link on the page
-  // with an id of "mylink"
   var a = document.getElementById('mobo');
+  var chart = document.getElementById('chartID');
+  var title = document.getElementById('titleID');
+
+  let mobosData = axios.get('/api/v1.0/getallmotherboards');
+  console.log(mobosData);
 
   const x = `
-            <div class="col-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title">sasas</h5>
-
-                        <div>Author: asas</div>
-                        <div>Publisher: sasas</div>
-                        <div>Number Of Pages: sasas</div>
-
-                        <hr>
-
-                        <button type="button" class="btn btn-danger">Delete</button>
-                      
-                    </div>
-                </div>
-            </div>
+ <h2>Motherboards that have been tested</h2>
+  <div class="table-responsive">
+    <table class="table table-striped table-sm">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Header</th>
+          <th>Header</th>
+          <th>Header</th>
+          <th>Header</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1,001</td>
+          <td>Lorem</td>
+          <td>ipsum</td>
+          <td>dolor</td>
+          <td>sit</td>
+        </tr>
+        <tr>
+          <td>1,002</td>
+          <td>amet</td>
+          <td>consectetur</td>
+          <td>adipiscing</td>
+          <td>elit</td>
+        </tr>
+        
+      </tbody>
+    </table>
+  </div>
+</main>
+</div>
+</div>
         `;
 
-  //Set code to run when the link is clicked
-  // by assigning a function to "onclick"
   a.onclick = function () {
+    chart.remove();
+    title.innerHTML = 'Motherboards';
     document.getElementById('table').innerHTML =
       document.getElementById('table').innerHTML + x;
     return false;
