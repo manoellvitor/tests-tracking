@@ -1,6 +1,5 @@
 const db = require('../config/db.config');
 const Motherboad = db.Motherboard;
-const path = __basedir + '/views/';
 
 // Get all Motherboards on DB
 exports.getAllMotherboards = (req, res) => {

@@ -42,7 +42,7 @@ fillMoboData = (files, mobosPath) => {
             motherboard.mrb = data[6];
             motherboard.comments = data[7];
           } catch (error) {
-            resizeBy.status(500).json({
+            res.status(500).json({
               Message: 'FAIL... Something wen wrong!',
               Error: error.message,
             });
