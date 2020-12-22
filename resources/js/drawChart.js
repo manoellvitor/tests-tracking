@@ -8,7 +8,7 @@ function drawChart(mobos) {
     resposive: true,
     type: 'pie',
     data: {
-      labels: ['Motherboards', 'Annapurnas', 'DIMMs', 'FANs', 'CPUs'],
+      labels: ['Motherboards', 'Annapurnas', 'DIMMs', 'CPUs', 'FANs'],
       datasets: [
         {
           label: 'Hardware tested',

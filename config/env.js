@@ -19,3 +19,5 @@ const env = {
 };
 
 module.exports = env;
+
+// moboPath: 'G:/Publics/Common/Debug/Testing/Foxconn motherboards/Tested/',
