@@ -6,12 +6,10 @@ const databaseFiller = require('../helpers/databaseFiller');
 const moboController = require('../controllers/moboController');
 const searchController = require('../controllers/searchController');
 
-const path = __basedir + '/views/';
-
 router.get('/', (req, res) => {
   db.sequelize.sync({ force: true }).then(() => {
     databaseFiller.getMoboData();
-    res.sendFile(path + 'index.html');
+    res.render('index');
   });
 });
 
@@ -21,4 +19,5 @@ router.get('/motherboards', (req, res) => {
 
 router.get('/api/v1.0/getallmotherboards', moboController.getAllMotherboards);
 router.get('/api/v1.0/searchbysn/:sn', searchController.searchBySerialNumber);
+
 module.exports = router;

@@ -3,7 +3,6 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
     <link rel="shortcut icon" href="images/favicon.ico" />
 
     <title>Welcome | Hardware Tested - JABIL</title>
@@ -18,21 +17,20 @@
 
     <!-- Bootstrap core CSS -->
     <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
       rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
       crossorigin="anonymous"
     />
 
     <!-- Custom styles for this template -->
-    <link href="css/dashboard.css" rel="stylesheet" />
+    <link href="/css/dashboard.css" rel="stylesheet" />
   </head>
-
   <body>
     <header
       class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow"
     >
-      <a class="navbar-brand col-md-3 col-lg-2 me-0 px-5" href="#"
+      <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="/"
         >JABIL - HT</a
       >
       <button
@@ -46,18 +44,19 @@
       >
         <span class="navbar-toggler-icon"></span>
       </button>
-
       <input
         class="form-control form-control-dark w-100"
         type="text"
-        placeholder="Search by Serial Number"
+        placeholder="Search"
         aria-label="Search"
-        id="searchInput"
       />
-      <button class="btn" id="searchBtn">
-        <i class="fas fa-search" style="color: white"></i>
-      </button>
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="#"><i class="fas fa-search"></i></a>
+        </li>
+      </ul>
     </header>
+
     <div class="container-fluid">
       <div class="row">
         <nav
@@ -69,12 +68,13 @@
               <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/">
                   <i class="fas fa-tachometer-alt"></i>
-                  Home - Dashboard
+                  Dashboard
                 </a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" id="mobo" href="">
-                  <i class="fas fa-microchip"></i>
+                <a class="nav-link" href="#">
+                  <i class="fas fa-chalkboard"></i>
+
                   Motherboards
                 </a>
               </li>
@@ -92,6 +92,12 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">
+                  <i class="fas fa-microchip"></i>
+                  CPUs
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
                   <i class="fas fa-fan"></i>
                   FANs
                 </a>
@@ -104,7 +110,7 @@
           <div
             class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
           >
-            <h1 class="h2" id="titleID">Dashboard</h1>
+            <h1 class="h2">Dashboard</h1>
             <div class="btn-toolbar mb-2 mb-md-0">
               <div class="btn-group me-2">
                 <button type="button" class="btn btn-sm btn-outline-secondary">
@@ -115,58 +121,46 @@
           </div>
 
           <!-- Chart -->
-          <div class="chart-container container" id="chartID">
+          <div class="table-responsive" id="chartID">
             <canvas id="totalHardwareChart"></canvas>
           </div>
 
-          <div hidden class="table-responsive" id="table">
-            <h5>Motherboards Tested</h5>
-            <div class="table-responsive">
-              <table class="table table-striped table-sm">
-                <thead>
-                  <tr>
-                    <th>Date Tested</th>
-                    <th>Serial Number</th>
-                    <th>MAC Address</th>
-                    <th>Tester</th>
-                    <th>Result</th>
-                    <th>Comments</th>
-                  </tr>
-                </thead>
-                <tbody id="tbody"></tbody>
-              </table>
-            </div>
-          </div>
+          <!-- <h2>Motherboards</h2>
+          <div class="table-responsive">
+            <table class="table table-striped table-sm" id="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Header</th>
+                  <th>Header</th>
+                  <th>Header</th>
+                  <th>Header</th>
+                </tr>
+              </thead>
+              <tbody id="tbody"></tbody>
+            </table>
+          </div> -->
         </main>
       </div>
     </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
-      integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
-      crossorigin="anonymous"
-    ></script>
-
-    <script
-      src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"
-      integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf"
-      crossorigin="anonymous"
-    ></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.0/axios.min.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
-
     <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
       crossorigin="anonymous"
     ></script>
 
-    <script src="/js/showMoboTable.js"></script>
-    <script src="/js/searchSerialNumber.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"
+      integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- <script src="/js/showMoboTable.js"></script> -->
+    <!-- <script src="/js/searchSerialNumber.js"></script> -->
     <script src="/js/drawChart.js"></script>
   </body>
 </html>

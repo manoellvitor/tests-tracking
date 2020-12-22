@@ -8,7 +8,7 @@ var flag = 0;
 const xhttp = new XMLHttpRequest();
 
 xhttp.open('GET', '/api/v1.0/searchbysn/' + searchInput, false);
-console.log(searchInput.value);
+
 xhttp.send();
 
 a.onclick = function () {
