@@ -11,17 +11,35 @@
   >
     <span class="navbar-toggler-icon"></span>
   </button>
-  <input
+
+  <form action="/api/v1.0/search" method="POST" class="row gy-2 gx-3 align-items-center">
+    <div class="col-auto">
+      <input
+        type="text"
+        name="search"
+        class="form-control form-control-dark w-100"
+        id="autoSizingInput"
+        placeholder="Search by Serial Number"
+      />
+    </div>
+
+    <div class="col-auto">
+      <button type="submit" class="btn btn-dark"><i class="fas fa-search"></i></a></button>
+    </div>
+  </form>
+
+  <!-- <input
     class="form-control form-control-dark w-100"
     type="text"
     placeholder="Search"
     aria-label="Search"
   />
+
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
       <a class="nav-link" href="#"><i class="fas fa-search"></i></a>
     </li>
-  </ul>
+  </ul> -->
 </header>
 
 <div class="container-fluid">

@@ -6,11 +6,12 @@ exports.searchBySerialNumber = (req, res) => {
   try {
     Motherboad.findAll({
       where: {
-        assetId: req.params.sn,
+        assetId: req.body.search,
       },
     }).then((searchData) => {
-      res.status(200).json({
-        searchData,
+      res.render('search', {
+        title: 'Search Result',
+        search: searchData,
       });
     });
   } catch (error) {
