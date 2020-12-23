@@ -11,7 +11,13 @@
   </div>
 </div>
 <div class="table-responsive">
-  <table class="table table-striped table-sm" id="table">
+  <caption>
+    List of Motherboards Tested
+  </caption>
+  <table
+    class="table table-striped table-sm table-hover align-middle"
+    id="table"
+  >
     <thead>
       <tr>
         <th>Date Tested</th>
@@ -25,10 +31,10 @@
     <tbody>
       <% mobos.forEach(function(mobo){ %>
       <tr>
-        <td><%= mobo.testedDate %></td>
-        <td><%= mobo.assetId %></td>
-        <td><%= mobo.macAddress %></td>
-        <td><%= mobo.tester %></td>
+        <td style="width: 10%"><%= mobo.testedDate %></td>
+        <td style="width: 10%"><%= mobo.assetId %></td>
+        <td style="width: 10%"><%= mobo.macAddress %></td>
+        <td style="width: 10%"><%= mobo.tester %></td>
         <td><%= mobo.result %></td>
         <td><%= mobo.comments %></td>
       </tr>
