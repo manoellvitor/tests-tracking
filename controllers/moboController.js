@@ -5,6 +5,7 @@ const Motherboad = db.Motherboard;
 exports.getAllMotherboards = (req, res) => {
   try {
     Motherboad.findAll({
+      order: [['testedDate', 'DESC']],
       attributes: [
         'testedDate',
         'assetId',

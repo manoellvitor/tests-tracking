@@ -11,6 +11,7 @@ let flag = 1;
 
 // Get all the Excel files of Motherboards
 function getMoboData() {
+  db.sequelize.sync({ force: true });
   try {
     fs.readdir(mobosPath, (err, files) => {
       if (err) {
@@ -59,9 +60,7 @@ fillMoboData = (files, mobosPath) => {
 };
 
 if (flag == 1) {
-  db.sequelize.sync({ force: true }).then(() => {
-    getMoboData();
-  });
+  getMoboData();
   flag = 0;
 }
 

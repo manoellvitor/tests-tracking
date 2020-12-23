@@ -46,7 +46,12 @@ function drawChartBar(mobos) {
   let pass = 0;
 
   mobos.forEach((mobo) => {
-    if (mobo.result == 'Fail') {
+    console.log(mobo.result);
+    if (
+      mobo.result == 'Fail' ||
+      mobo.result == 'Faild' ||
+      mobo.result == 'Fail Test'
+    ) {
       fail++;
     } else if (mobo.result == 'Pass') {
       pass++;
@@ -76,6 +81,15 @@ function drawChartBar(mobos) {
       ],
     },
     options: {
+      scales: {
+        yAxes: [
+          {
+            ticks: {
+              beginAtZero: true,
+            },
+          },
+        ],
+      },
       resposive: true,
       title: {
         display: true,
