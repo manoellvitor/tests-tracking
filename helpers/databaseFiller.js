@@ -7,8 +7,10 @@ const Motherboad = db.Motherboard;
 
 const mobosPath = env.filesPath.moboPath;
 
+let flag = 1;
+
 // Get all the Excel files of Motherboards
-exports.getMoboData = () => {
+function getMoboData() {
   try {
     fs.readdir(mobosPath, (err, files) => {
       if (err) {
@@ -22,7 +24,7 @@ exports.getMoboData = () => {
   } catch (error) {
     console.log('Error: ' + error.message);
   }
-};
+}
 
 // Fill DB with Motherboards data
 fillMoboData = (files, mobosPath) => {
@@ -55,3 +57,12 @@ fillMoboData = (files, mobosPath) => {
     console.log('Error:' + error.message);
   }
 };
+
+if (flag == 1) {
+  db.sequelize.sync({ force: true }).then(() => {
+    getMoboData();
+  });
+  flag = 0;
+}
+
+setInterval(getMoboData, 1800000);

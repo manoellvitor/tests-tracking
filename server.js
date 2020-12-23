@@ -6,6 +6,9 @@ const cors = require('cors');
 const env = require('./config/env');
 const router = require('./routers/routes');
 
+// Database Population
+const databaseFiller = require('./helpers/databaseFiller');
+
 // Server PORT
 const PORT = env.server.PORT || 5000;
 

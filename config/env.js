@@ -14,7 +14,7 @@ const env = {
   },
 
   filesPath: {
-    moboPath: 'C:/Users/2514164.JABIL/Desktop/TestedHardware/',
+    moboPath: 'G:/Publics/Common/Debug/Testing/Foxconn motherboards/Tested/',
   },
 };
 
