@@ -62,7 +62,7 @@ function drawChartBar(mobos) {
   var FailAndPass = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['Motherboards', 'Annapurnas', 'Fail', 'Pass', 'FANs'],
+      labels: ['Motherboards', 'Annapurnas', 'DIMMs', 'CPUs', 'FANs'],
       datasets: [
         {
           label: 'Fail',
