@@ -15,6 +15,7 @@ const env = {
 
   filesPath: {
     moboPath: 'G:/Publics/Common/Debug/Testing/Foxconn motherboards/Tested/',
+    // dimmPath: 'G:/Publics/Common/Debug/Testing/DIMMs/Tested/',
   },
 };
 
