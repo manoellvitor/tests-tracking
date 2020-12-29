@@ -1,9 +1,28 @@
-axios.get('/api/v1.0/getallmotherboards').then((resp) => {
-  drawChart(Object.keys(resp.data.Motherboards).length);
-  drawChartBar(resp.data.Motherboards);
+function getMobos() {
+  return axios.get('/api/v1.0/getallmotherboards');
+}
+
+function getDimms() {
+  return axios.get('/api/v1.0/getalldimms');
+}
+
+Promise.all([getMobos(), getDimms()]).then(function (results) {
+  const mobos = results[0];
+  const dimms = results[1];
+
+  drawChart(
+    Object.keys(mobos.data.Motherboards).length,
+    Object.keys(dimms.data.Dimms).length,
+  );
+  drawChartBar(mobos.data.Motherboards, dimms.data.Dimms);
 });
 
-function drawChart(mobos) {
+// axios.get('/api/v1.0/getallmotherboards').then((resp) => {
+//   drawChart(Object.keys(resp.data.Motherboards).length);
+//   drawChartBar(resp.data.Motherboards);
+// });
+
+function drawChart(mobos, dimms) {
   var ctx = document.getElementById('totalHardwareChart').getContext('2d');
   var totalHardwareChart = new Chart(ctx, {
     type: 'pie',
@@ -12,7 +31,7 @@ function drawChart(mobos) {
       datasets: [
         {
           label: 'Hardware Tested',
-          data: [mobos, 192, 35, 55, 221],
+          data: [mobos, 192, dimms, 55, 221],
           backgroundColor: [
             'rgba(255, 99, 132, 1)',
             'rgba(54, 162, 235, 1)',
@@ -41,20 +60,33 @@ function drawChart(mobos) {
   });
 }
 
-function drawChartBar(mobos) {
-  let fail = 0;
-  let pass = 0;
+function drawChartBar(mobos, dimms) {
+  let moboFail = 0;
+  let moboPass = 0;
+  let dimmFail = 0;
+  let dimmPass = 0;
 
   mobos.forEach((mobo) => {
-    console.log(mobo.result);
     if (
       mobo.result == 'Fail' ||
       mobo.result == 'Faild' ||
       mobo.result == 'Fail Test'
     ) {
-      fail++;
+      moboFail++;
     } else if (mobo.result == 'Pass') {
-      pass++;
+      moboPass++;
+    }
+  });
+
+  dimms.forEach((dimm) => {
+    if (
+      dimm.result == 'Fail' ||
+      dimm.result == 'Faild' ||
+      dimm.result == 'Fail Test'
+    ) {
+      dimmFail++;
+    } else if (dimm.result == 'Pass') {
+      dimmPass++;
     }
   });
 
@@ -66,17 +98,41 @@ function drawChartBar(mobos) {
       datasets: [
         {
           label: 'Fail',
-          backgroundColor: ['rgba(255, 0, 0, 1)'],
-          borderColor: ['rgba(0, 0, 0, 255)'],
+          backgroundColor: [
+            'rgba(255, 0, 0, 1)',
+            'rgba(255, 0, 0, 1)',
+            'rgba(255, 0, 0, 1)',
+            'rgba(255, 0, 0, 1)',
+            'rgba(255, 0, 0, 1)',
+          ],
+          borderColor: [
+            'rgba(0, 0, 0, 255)',
+            'rgba(0, 0, 0, 255)',
+            'rgba(0, 0, 0, 255)',
+            'rgba(0, 0, 0, 255)',
+            'rgba(0, 0, 0, 255)',
+          ],
           borderWidth: 1,
-          data: [fail],
+          data: [moboFail, 3, dimmFail, 10, 20],
         },
         {
           label: 'Pass',
-          backgroundColor: ['rgba(0, 255, 0, 1)'],
-          borderColor: ['rgba(0, 0, 0, 255)'],
+          backgroundColor: [
+            'rgba(0, 255, 0, 1)',
+            'rgba(0, 255, 0, 1)',
+            'rgba(0, 255, 0, 1)',
+            'rgba(0, 255, 0, 1)',
+            'rgba(0, 255, 0, 1)',
+          ],
+          borderColor: [
+            'rgba(0, 0, 0, 255)',
+            'rgba(0, 0, 0, 255)',
+            'rgba(0, 0, 0, 255)',
+            'rgba(0, 0, 0, 255)',
+            'rgba(0, 0, 0, 255)',
+          ],
           borderWidth: 1,
-          data: [pass],
+          data: [moboPass, 2, dimmPass, 45, 54],
         },
       ],
     },
@@ -91,6 +147,9 @@ function drawChartBar(mobos) {
         ],
       },
       resposive: true,
+      legend: {
+        position: 'top',
+      },
       title: {
         display: true,
         text: 'Overall Number of Failures and Success.',
