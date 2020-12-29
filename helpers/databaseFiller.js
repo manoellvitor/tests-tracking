@@ -13,7 +13,6 @@ let flag = 1;
 
 // Get all the Excel files of Motherboards
 function getMoboData() {
-  db.sequelize.sync({ force: true });
   try {
     fs.readdir(mobosPath, (err, files) => {
       if (err) {
@@ -21,7 +20,47 @@ function getMoboData() {
       } else if (!files.length) {
         return console.log('Empty Directory');
       } else {
-        fillMoboData(files, mobosPath);
+        try {
+          Motherboad.sync({ force: true }).then(() => {
+            try {
+              // db.sequelize.sync({ force: false });
+              for (i = 0; i < files.length; i++) {
+                xlsxFile(mobosPath + files[i]).then((rows) => {
+                  rows.shift();
+                  rows.forEach((data) => {
+                    let motherboard = {};
+                    try {
+                      motherboard.addedDate = data[0];
+                      motherboard.assetId = data[1];
+                      motherboard.macAddress = data[2];
+                      motherboard.testedDate = data[3];
+                      motherboard.result = data[4];
+                      motherboard.tester = data[5];
+                      motherboard.mrb = data[6];
+                      motherboard.comments = data[7];
+                    } catch (error) {
+                      res.status(500).json({
+                        Message: 'FAIL... Something wen wrong!',
+                        Error: error.message,
+                      });
+                    }
+                    try {
+                      Motherboad.create(motherboard);
+                    } catch (error) {
+                      console.log('Error:' + error.message);
+                    }
+                  });
+                });
+              }
+            } catch (error) {
+              console.log('Error:' + error.message);
+            }
+          });
+          getDimmData();
+          // fillMoboData(files, mobosPath);
+        } catch (error) {
+          console.log('Error: ' + error.message);
+        }
       }
     });
   } catch (error) {
@@ -38,7 +77,43 @@ function getDimmData() {
       } else if (!files.length) {
         return console.log('Empty Directory');
       } else {
-        fillDimmData(files, dimmPath);
+        try {
+          // fillDimmData(files, dimmPath);
+          Dimm.sync({ force: true }).then(() => {
+            try {
+              for (i = 0; i < files.length; i++) {
+                xlsxFile(dimmPath + files[i]).then((rows) => {
+                  rows.shift();
+                  rows.forEach((data) => {
+                    let dimm = {};
+                    try {
+                      dimm.testedDate = data[0];
+                      dimm.assetId = data[1];
+                      dimm.result = data[2];
+                      dimm.tester = data[3];
+                      dimm.mrb = data[4];
+                      dimm.comments = data[5];
+                    } catch (error) {
+                      res.status(500).json({
+                        Message: 'FAIL... Something wen wrong!',
+                        Error: error.message,
+                      });
+                    }
+                    try {
+                      Dimm.create(dimm);
+                    } catch (error) {
+                      console.log('Error:' + error.message);
+                    }
+                  });
+                });
+              }
+            } catch (error) {
+              console.log('Error:' + error.message);
+            }
+          });
+        } catch (error) {
+          console.log('Error: ' + error.message);
+        }
       }
     });
   } catch (error) {
@@ -47,75 +122,87 @@ function getDimmData() {
 }
 
 // Fill DB with Motherboards data
-fillMoboData = (files, mobosPath) => {
-  try {
-    for (i = 0; i < files.length; i++) {
-      xlsxFile(mobosPath + files[i]).then((rows) => {
-        rows.shift();
-        rows.forEach((data) => {
-          let motherboard = {};
-          try {
-            motherboard.addedDate = data[0];
-            motherboard.assetId = data[1];
-            motherboard.macAddress = data[2];
-            motherboard.testedDate = data[3];
-            motherboard.result = data[4];
-            motherboard.tester = data[5];
-            motherboard.mrb = data[6];
-            motherboard.comments = data[7];
-          } catch (error) {
-            res.status(500).json({
-              Message: 'FAIL... Something wen wrong!',
-              Error: error.message,
-            });
-          }
-          Motherboad.create(motherboard);
-        });
-      });
-    }
-    try {
-      getDimmData();
-    } catch (error) {
-      console.log('Error:' + error.message);
-    }
-  } catch (error) {
-    console.log('Error:' + error.message);
-  }
-};
+// fillMoboData = (files, mobosPath) => {
+//   try {
+//     // db.sequelize.sync({ force: false });
+//     for (i = 0; i < files.length; i++) {
+//       xlsxFile(mobosPath + files[i]).then((rows) => {
+//         rows.shift();
+//         rows.forEach((data) => {
+//           let motherboard = {};
+//           try {
+//             motherboard.addedDate = data[0];
+//             motherboard.assetId = data[1];
+//             motherboard.macAddress = data[2];
+//             motherboard.testedDate = data[3];
+//             motherboard.result = data[4];
+//             motherboard.tester = data[5];
+//             motherboard.mrb = data[6];
+//             motherboard.comments = data[7];
+//           } catch (error) {
+//             res.status(500).json({
+//               Message: 'FAIL... Something wen wrong!',
+//               Error: error.message,
+//             });
+//           }
+//           try {
+//             Motherboad.create(motherboard);
+//           } catch (error) {
+//             console.log('Error:' + error.message);
+//           }
+//         });
+//       });
+//     }
+//     try {
+//       getDimmData();
+//     } catch (error) {
+//       console.log('Error:' + error.message);
+//     }
+//   } catch (error) {
+//     console.log('Error:' + error.message);
+//   }
+// };
 
 // // Fill DB with DIMM data
-fillDimmData = (files, dimmPath) => {
+// fillDimmData = (files, dimmPath) => {
+//   try {
+//     for (i = 0; i < files.length; i++) {
+//       xlsxFile(dimmPath + files[i]).then((rows) => {
+//         rows.shift();
+//         rows.forEach((data) => {
+//           let dimm = {};
+//           try {
+//             dimm.testedDate = data[0];
+//             dimm.assetId = data[1];
+//             dimm.result = data[2];
+//             dimm.tester = data[3];
+//             dimm.mrb = data[4];
+//             dimm.comments = data[5];
+//           } catch (error) {
+//             res.status(500).json({
+//               Message: 'FAIL... Something wen wrong!',
+//               Error: error.message,
+//             });
+//           }
+//           try {
+//             Dimm.create(dimm);
+//           } catch (error) {
+//             console.log('Error:' + error.message);
+//           }
+//         });
+//       });
+//     }
+//   } catch (error) {
+//     console.log('Error:' + error.message);
+//   }
+// };
+
+if (flag == 1) {
   try {
-    for (i = 0; i < files.length; i++) {
-      xlsxFile(dimmPath + files[i]).then((rows) => {
-        rows.shift();
-        rows.forEach((data) => {
-          let dimm = {};
-          try {
-            dimm.testedDate = data[0];
-            dimm.assetId = data[1];
-            dimm.result = data[2];
-            dimm.tester = data[3];
-            dimm.mrb = data[4];
-            dimm.comments = data[5];
-          } catch (error) {
-            res.status(500).json({
-              Message: 'FAIL... Something wen wrong!',
-              Error: error.message,
-            });
-          }
-          Dimm.create(dimm);
-        });
-      });
-    }
-    console.log(dimm);
+    getMoboData();
   } catch (error) {
     console.log('Error:' + error.message);
   }
-};
-
-if (flag == 1) {
-  getMoboData();
   flag = 0;
 }
 

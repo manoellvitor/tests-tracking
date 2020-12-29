@@ -4,12 +4,10 @@ const Sequelize = require('sequelize');
 const sequelize = new Sequelize({
   dialect: env.dialect,
   storage: env.storage,
-
   pool: {
-    max: env.pool.max,
-    min: env.pool.min,
-    acquire: env.pool.acquire,
-    idle: env.pool.idle,
+    max: 5,
+    min: 0,
+    idle: 10000,
   },
 });
 
