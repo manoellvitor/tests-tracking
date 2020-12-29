@@ -19,6 +19,6 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.Motherboard = require('../models/Motherboard')(sequelize, Sequelize);
-// db.Dimm = require('../models/Dimm')(sequelize, Sequelize);
+db.Dimm = require('../models/Dimm')(sequelize, Sequelize);
 
 module.exports = db;
