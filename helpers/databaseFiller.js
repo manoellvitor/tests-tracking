@@ -130,4 +130,4 @@ if (flag == 1) {
   flag = 0;
 }
 
-setInterval(getMoboData, 60000);
+setInterval(getMoboData, 1800000);
