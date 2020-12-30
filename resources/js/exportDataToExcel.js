@@ -5,7 +5,7 @@ function exportTableToExcel(tableID, filename = '') {
   var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
 
   // Specify file name
-  filename = filename ? filename + '.xls' : 'excel_data.xls';
+  filename = filename ? filename + '.xls' : 'hardware_tested.xls';
 
   // Create download link element
   downloadLink = document.createElement('a');
