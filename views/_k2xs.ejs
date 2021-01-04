@@ -32,13 +32,13 @@
       </tr>
     </thead>
     <tbody>
-      <% dimms.forEach(function(dimm){ %>
+      <% k2xs.forEach(function(k2x){ %>
       <tr>
-        <td style="width: 10%"><%= dimm.testedDate %></td>
-        <td style="width: 10%"><%= dimm.assetId %></td>
-        <td style="width: 10%"><%= dimm.tester %></td>
-        <td><%= dimm.result %></td>
-        <td><%= dimm.comments %></td>
+        <td style="width: 10%"><%= k2x.testedDate %></td>
+        <td style="width: 10%"><%= k2x.assetId %></td>
+        <td style="width: 10%"><%= k2x.tester %></td>
+        <td><%= k2x.result %></td>
+        <td><%= k2x.comments %></td>
       </tr>
       <% }) %>
     </tbody>

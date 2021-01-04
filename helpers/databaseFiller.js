@@ -7,11 +7,13 @@ const Motherboad = db.Motherboard;
 const Dimm = db.Dimm;
 const K2t = db.K2t;
 const K2c = db.K2c;
+const K2x = db.K2x;
 
 const mobosPath = env.filesPath.moboPath;
 const dimmPath = env.filesPath.dimmPath;
 const k2tPath = env.filesPath.k2tPath;
 const k2cPath = env.filesPath.k2cPath;
+const k2xPath = env.filesPath.k2xPath;
 
 let flag = 1;
 
@@ -215,6 +217,61 @@ function getK2cData() {
                     }
                     try {
                       K2c.create(k2c);
+                    } catch (error) {
+                      console.log('Error:' + error.message);
+                    }
+                  });
+                });
+              }
+            } catch (error) {
+              console.log('Error:' + error.message);
+            }
+          });
+          getK2xData();
+        } catch (error) {
+          console.log('Error: ' + error.message);
+        }
+      }
+    });
+  } catch (error) {
+    console.log('Error: ' + error.message);
+  }
+}
+
+// Get all the Excel files of K2Xs
+function getK2xData() {
+  try {
+    fs.readdir(k2xPath, (err, files) => {
+      if (err) {
+        return console.log('Unable to ready directory:' + err.message);
+      } else if (!files.length) {
+        return console.log('Empty Directory');
+      } else {
+        try {
+          // fillDimmData(files, dimmPath);
+          K2x.sync({ force: true }).then(() => {
+            try {
+              for (i = 0; i < files.length; i++) {
+                xlsxFile(k2xPath + files[i]).then((rows) => {
+                  rows.shift();
+                  rows.forEach((data) => {
+                    let k2x = {};
+                    try {
+                      k2x.addedDate = data[0];
+                      k2x.assetId = data[1];
+                      k2x.testedDate = data[2];
+                      k2x.result = data[3];
+                      k2x.tester = data[4];
+                      k2x.mrb = data[5];
+                      k2x.comments = data[6];
+                    } catch (error) {
+                      res.status(500).json({
+                        Message: 'FAIL... Something wen wrong!',
+                        Error: error.message,
+                      });
+                    }
+                    try {
+                      K2x.create(k2x);
                     } catch (error) {
                       console.log('Error:' + error.message);
                     }
