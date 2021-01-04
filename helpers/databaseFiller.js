@@ -181,7 +181,7 @@ function getK2tData() {
   }
 }
 
-// Get all the Excel files of K2Ts
+// Get all the Excel files of K2Cs
 function getK2cData() {
   try {
     fs.readdir(k2cPath, (err, files) => {
@@ -195,7 +195,7 @@ function getK2cData() {
           K2c.sync({ force: true }).then(() => {
             try {
               for (i = 0; i < files.length; i++) {
-                xlsxFile(k2tPath + files[i]).then((rows) => {
+                xlsxFile(k2cPath + files[i]).then((rows) => {
                   rows.shift();
                   rows.forEach((data) => {
                     let k2c = {};
@@ -244,4 +244,4 @@ if (flag == 1) {
   flag = 0;
 }
 
-// setInterval(getMoboData, 1800000);
+setInterval(getMoboData, 1800000);

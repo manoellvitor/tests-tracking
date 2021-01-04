@@ -10,7 +10,7 @@ const env = {
     moboPath: 'C:/Users/2514164.JABIL/Desktop/TestedHardware/MB/',
     dimmPath: 'C:/Users/2514164.JABIL/Desktop/TestedHardware/DIMM/',
     k2tPath: 'G:/Publics/Common/Debug/Testing/K2T/Tested/',
-    k2tPath: 'G:/Publics/Common/Debug/Testing/K2C/Tested/',
+    k2cPath: 'G:/Publics/Common/Debug/Testing/K2C/Tested/',
   },
 };
 
