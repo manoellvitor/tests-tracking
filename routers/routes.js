@@ -5,6 +5,7 @@ const axios = require('axios');
 const moboController = require('../controllers/moboController');
 const dimmController = require('../controllers/dimmController');
 const k2tController = require('../controllers/k2tController');
+const k2cController = require('../controllers/k2cController');
 const searchController = require('../controllers/searchController');
 
 router.get('/', (req, res) => {
@@ -46,19 +47,18 @@ router.get('/k2ts', async (req, res) => {
 });
 
 router.get('/k2cs', async (req, res) => {
-  res.render('k2c', { title: 'K2C Cards' });
-  // try {
-  //   await axios
-  //     .get('http://localhost:5000/api/v1.0/getalldimms')
-  //     .then((dimmsAPI) => {
-  //       res.render('dimm', {
-  //         title: 'DIMMs',
-  //         dimms: dimmsAPI.data.Dimms,
-  //       });
-  //     });
-  // } catch (error) {
-  //   console.log(error.message);
-  // }
+  try {
+    await axios
+      .get('http://localhost:5000/api/v1.0/getallk2cs')
+      .then((k2csAPI) => {
+        res.render('k2c', {
+          title: 'K2Cs',
+          k2cs: k2csAPI.data.K2cs,
+        });
+      });
+  } catch (error) {
+    console.log(error.message);
+  }
 });
 
 router.get('/k2xs', async (req, res) => {
@@ -97,6 +97,8 @@ router.get('/api/v1.0/getallmotherboards', moboController.getAllMotherboards);
 router.get('/api/v1.0/getalldimms', dimmController.getAllDimms);
 
 router.get('/api/v1.0/getallk2ts', k2tController.getAllK2ts);
+
+router.get('/api/v1.0/getallk2cs', k2cController.getAllK2cs);
 
 router.post('/api/v1.0/search', async (req, res) => {
   await searchController.searchBySerialNumber(req, res);
