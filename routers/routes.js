@@ -25,6 +25,58 @@ router.get('/mobos', async (req, res) => {
   }
 });
 
+router.get('/annas', async (req, res) => {
+  res.render('anna', { title: 'Annapurnas' });
+});
+
+router.get('/k2ts', async (req, res) => {
+  res.render('k2t', { title: 'K2T Cards' });
+  // try {
+  //   await axios
+  //     .get('http://localhost:5000/api/v1.0/getalldimms')
+  //     .then((dimmsAPI) => {
+  //       res.render('dimm', {
+  //         title: 'DIMMs',
+  //         dimms: dimmsAPI.data.Dimms,
+  //       });
+  //     });
+  // } catch (error) {
+  //   console.log(error.message);
+  // }
+});
+
+router.get('/k2cs', async (req, res) => {
+  res.render('k2c', { title: 'K2C Cards' });
+  // try {
+  //   await axios
+  //     .get('http://localhost:5000/api/v1.0/getalldimms')
+  //     .then((dimmsAPI) => {
+  //       res.render('dimm', {
+  //         title: 'DIMMs',
+  //         dimms: dimmsAPI.data.Dimms,
+  //       });
+  //     });
+  // } catch (error) {
+  //   console.log(error.message);
+  // }
+});
+
+router.get('/k2xs', async (req, res) => {
+  res.render('k2x', { title: 'K2X Cards' });
+  // try {
+  //   await axios
+  //     .get('http://localhost:5000/api/v1.0/getalldimms')
+  //     .then((dimmsAPI) => {
+  //       res.render('dimm', {
+  //         title: 'DIMMs',
+  //         dimms: dimmsAPI.data.Dimms,
+  //       });
+  //     });
+  // } catch (error) {
+  //   console.log(error.message);
+  // }
+});
+
 router.get('/dimms', async (req, res) => {
   try {
     await axios
