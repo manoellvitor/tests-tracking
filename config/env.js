@@ -7,8 +7,8 @@ const env = {
   },
 
   filesPath: {
-    moboPath: 'C:/Users/2514164.JABIL/Desktop/TestedHardware/MB/',
-    dimmPath: 'C:/Users/2514164.JABIL/Desktop/TestedHardware/DIMM/',
+    moboPath: 'G:/Publics/Common/Debug/Testing/Foxconn motherboards/Tested/',
+    dimmPath: 'G:/Publics/Common/Debug/Testing/DIMMs/Tested/',
     k2tPath: 'G:/Publics/Common/Debug/Testing/K2T/Tested/',
     k2cPath: 'G:/Publics/Common/Debug/Testing/K2C/Tested/',
     k2xPath: 'G:/Publics/Common/Debug/Testing/K2X/Tested/',

@@ -126,7 +126,8 @@ function drawChartBar(mobos, dimms, k2ts, k2cs, k2xs) {
     if (
       k2t.result == 'Fail' ||
       k2t.result == 'Faild' ||
-      k2t.result == 'Fail Test'
+      k2t.result == 'Fail Test' ||
+      k2t.result == 'Failed'
     ) {
       k2tFail++;
     } else if (k2t.result == 'Pass') {
@@ -134,11 +135,15 @@ function drawChartBar(mobos, dimms, k2ts, k2cs, k2xs) {
     }
   });
 
+  annasFail = k2tFail;
+  annasPass = k2tPass;
+
   k2cs.forEach((k2c) => {
     if (
       k2c.result == 'Fail' ||
       k2c.result == 'Faild' ||
-      k2c.result == 'Fail Test'
+      k2c.result == 'Fail Test' ||
+      k2c.result == 'Failed'
     ) {
       k2cfail++;
     } else if (k2c.result == 'Pass') {
@@ -146,11 +151,15 @@ function drawChartBar(mobos, dimms, k2ts, k2cs, k2xs) {
     }
   });
 
+  annasFail = annasFail + k2cfail;
+  annasPass = annasPass + k2cPass;
+
   k2xs.forEach((k2x) => {
     if (
       k2x.result == 'Fail' ||
       k2x.result == 'Faild' ||
-      k2x.result == 'Fail Test'
+      k2x.result == 'Fail Test' ||
+      k2x.result == 'Failed'
     ) {
       k2xfail++;
     } else if (k2x.result == 'Pass') {
@@ -158,8 +167,8 @@ function drawChartBar(mobos, dimms, k2ts, k2cs, k2xs) {
     }
   });
 
-  annasFail = k2tFail + k2cFail + k2xFail;
-  annasPass = k2tPass + k2cPass + k2xPass;
+  annasFail = annasFail + k2xfail;
+  annasPass = annasPass + k2xPass;
 
   var ctx = document.getElementById('FailAndPass').getContext('2d');
   var FailAndPass = new Chart(ctx, {
