@@ -100,7 +100,7 @@ router.get('/api/v1.0/getallk2ts', k2tController.getAllK2ts);
 
 router.get('/api/v1.0/getallk2cs', k2cController.getAllK2cs);
 
-router.get('/api/v1.0/getallk2cs', k2xController.getAllK2xs);
+router.get('/api/v1.0/getallk2xs', k2xController.getAllK2xs);
 
 router.post('/api/v1.0/search', async (req, res) => {
   await searchController.searchBySerialNumber(req, res);
