@@ -2,17 +2,23 @@ function getMobos() {
   return axios.get('/api/v1.0/getallmotherboards');
 }
 
+function getK2ts() {
+  return axios.get('/api/v1.0/getallk2ts');
+}
+
 function getDimms() {
   return axios.get('/api/v1.0/getalldimms');
 }
 
-Promise.all([getMobos(), getDimms()]).then(function (results) {
+Promise.all([getMobos(), getDimms(), getK2ts()]).then(function (results) {
   const mobos = results[0];
   const dimms = results[1];
+  const k2ts = results[2];
 
   drawChart(
     Object.keys(mobos.data.Motherboards).length,
     Object.keys(dimms.data.Dimms).length,
+    Object.keys(k2ts.data.K2ts).length,
   );
   drawChartBar(mobos.data.Motherboards, dimms.data.Dimms);
 });
@@ -22,7 +28,7 @@ Promise.all([getMobos(), getDimms()]).then(function (results) {
 //   drawChartBar(resp.data.Motherboards);
 // });
 
-function drawChart(mobos, dimms) {
+function drawChart(mobos, dimms, k2ts) {
   var ctx = document.getElementById('totalHardwareChart').getContext('2d');
   var totalHardwareChart = new Chart(ctx, {
     type: 'pie',
@@ -31,7 +37,7 @@ function drawChart(mobos, dimms) {
       datasets: [
         {
           label: 'Hardware Tested',
-          data: [mobos, 192, dimms, 55, 221],
+          data: [mobos, k2ts, dimms, 55, 221],
           backgroundColor: [
             'rgba(255, 99, 132, 1)',
             'rgba(54, 162, 235, 1)',

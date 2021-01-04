@@ -5,9 +5,11 @@ const xlsxFile = require('read-excel-file/node');
 const db = require('../config/db.config');
 const Motherboad = db.Motherboard;
 const Dimm = db.Dimm;
+const K2t = db.K2t;
 
 const mobosPath = env.filesPath.moboPath;
 const dimmPath = env.filesPath.dimmPath;
+const k2tPath = env.filesPath.k2tPath;
 
 let flag = 1;
 
@@ -111,6 +113,61 @@ function getDimmData() {
               console.log('Error:' + error.message);
             }
           });
+          getK2tData();
+        } catch (error) {
+          console.log('Error: ' + error.message);
+        }
+      }
+    });
+  } catch (error) {
+    console.log('Error: ' + error.message);
+  }
+}
+
+// Get all the Excel files of K2Ts
+function getK2tData() {
+  try {
+    fs.readdir(k2tPath, (err, files) => {
+      if (err) {
+        return console.log('Unable to ready directory:' + err.message);
+      } else if (!files.length) {
+        return console.log('Empty Directory');
+      } else {
+        try {
+          // fillDimmData(files, dimmPath);
+          K2t.sync({ force: true }).then(() => {
+            try {
+              for (i = 0; i < files.length; i++) {
+                xlsxFile(k2tPath + files[i]).then((rows) => {
+                  rows.shift();
+                  rows.forEach((data) => {
+                    let k2t = {};
+                    try {
+                      k2t.addedDate = data[0];
+                      k2t.assetId = data[1];
+                      k2t.testedDate = data[2];
+                      k2t.result = data[3];
+                      k2t.tester = data[4];
+                      k2t.mrb = data[5];
+                      k2t.comments = data[6];
+                    } catch (error) {
+                      res.status(500).json({
+                        Message: 'FAIL... Something wen wrong!',
+                        Error: error.message,
+                      });
+                    }
+                    try {
+                      K2t.create(k2t);
+                    } catch (error) {
+                      console.log('Error:' + error.message);
+                    }
+                  });
+                });
+              }
+            } catch (error) {
+              console.log('Error:' + error.message);
+            }
+          });
         } catch (error) {
           console.log('Error: ' + error.message);
         }
@@ -130,4 +187,4 @@ if (flag == 1) {
   flag = 0;
 }
 
-setInterval(getMoboData, 1800000);
+// setInterval(getMoboData, 1800000);
