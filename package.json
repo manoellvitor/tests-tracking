@@ -2,8 +2,9 @@
   "name": "jabil-hardware",
   "version": "1.0.0",
   "description": "Application to get all data from Excel Sheets and show it in a user friendly way",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "dev": "nodemon server.js"
   },
   "repository": {
