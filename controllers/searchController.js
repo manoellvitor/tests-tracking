@@ -42,6 +42,10 @@ exports.searchBySerialNumber = (req, res) => {
                               },
                             }).then((searchData) => {
                               if (searchData == '') {
+                                res.render('search', {
+                                  title: 'Search Result',
+                                  search: searchData,
+                                });
                               } else {
                                 res.render('search', {
                                   title: 'Search Result',
