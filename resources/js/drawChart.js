@@ -46,6 +46,7 @@ Promise.all([getMobos(), getDimms(), getK2ts(), getK2cs(), getK2xs()]).then(
 );
 
 function drawChart(mobos, dimms, annas) {
+  var canvas = document.getElementById('totalHardwareChart');
   var ctx = document.getElementById('totalHardwareChart').getContext('2d');
   var totalHardwareChart = new Chart(ctx, {
     type: 'pie',
@@ -81,6 +82,24 @@ function drawChart(mobos, dimms, annas) {
       },
     },
   });
+
+  canvas.onclick = function (evt) {
+    var activePoints = totalHardwareChart.getElementsAtEvent(evt);
+    if (activePoints[0]) {
+      var chartData = activePoints[0]['_chart'].config.data;
+      var idx = activePoints[0]['_index'];
+
+      var label = chartData.labels[idx];
+
+      if (label == 'Motherboards') {
+        window.location.replace('http://10.76.12.30:5000/mobos');
+      } else if (label == 'Annapurnas') {
+        window.location.replace('http://10.76.12.30:5000/annas');
+      } else if (label == 'DIMMs') {
+        window.location.replace('http://10.76.12.30:5000/dimms');
+      }
+    }
+  };
 }
 
 function drawChartBar(mobos, dimms, k2ts, k2cs, k2xs) {
