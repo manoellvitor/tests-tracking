@@ -55,7 +55,7 @@ function drawChart(mobos, dimms, annas) {
       datasets: [
         {
           label: 'Hardware Tested',
-          data: [mobos, annas, dimms, 200, 300],
+          data: [mobos, annas, dimms, 800, 700],
           backgroundColor: [
             'rgba(255, 99, 132, 1)',
             'rgba(54, 162, 235, 1)',
@@ -212,7 +212,7 @@ function drawChartBar(mobos, dimms, k2ts, k2cs, k2xs) {
             'rgba(0, 0, 0, 255)',
           ],
           borderWidth: 1,
-          data: [moboFail, annasFail, dimmFail, 10, 20],
+          data: [moboFail, annasFail, dimmFail, 800, 700],
         },
         {
           label: 'Pass',
@@ -231,7 +231,7 @@ function drawChartBar(mobos, dimms, k2ts, k2cs, k2xs) {
             'rgba(0, 0, 0, 255)',
           ],
           borderWidth: 1,
-          data: [moboPass, annasPass, dimmPass, 45, 54],
+          data: [moboPass, annasPass, dimmPass, 370, 256],
         },
       ],
     },
