@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const moment = require('moment');
 
 const moboController = require('../controllers/moboController');
 const dimmController = require('../controllers/dimmController');
@@ -21,6 +22,7 @@ router.get('/mobos', async (req, res) => {
         res.render('mobo', {
           title: 'Motherboards',
           mobos: mobosAPI.data.Motherboards,
+          moment: moment,
         });
       });
   } catch (error) {

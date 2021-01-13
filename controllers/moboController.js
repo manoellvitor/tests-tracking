@@ -1,4 +1,5 @@
 const db = require('../config/db.config');
+const moment = require('moment');
 const Motherboad = db.Motherboard;
 
 // Get all Motherboards on DB
@@ -17,6 +18,7 @@ exports.getAllMotherboards = (req, res) => {
     }).then((moboInfos) => {
       res.status(200).json({
         Motherboards: moboInfos,
+        moment: moment,
       });
     });
   } catch (error) {
