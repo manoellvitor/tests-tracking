@@ -27,7 +27,7 @@ app.set('view engine', 'ejs');
 
 // Midleware
 app.use(cors());
-app.use(morgan('dev'));
+app.use(morgan('tiny'));
 
 // Routes
 app.use('/', router);
