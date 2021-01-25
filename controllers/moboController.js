@@ -1,17 +1,14 @@
 const db = require('../config/db.config');
-const moment = require('moment');
-const Motherboad = db.Motherboard;
-const Sequelize = require('sequelize');
-const Op = Sequelize.Op;
 const sizeof = require('object-sizeof');
+const Sequelize = require('sequelize');
+const Motherboad = db.Motherboard;
+const Op = Sequelize.Op;
 
 // Get all Motherboards on DB
 exports.getAllMotherboards = (req, res) => {
   let start;
   let end;
-  console.log(sizeof(req.body));
-  if (req.body.start > 1) {
-    console.log(req.body);
+  if (sizeof(req.body) > 1) {
     start = req.body.start;
     end = req.body.end;
   } else {
@@ -35,43 +32,17 @@ exports.getAllMotherboards = (req, res) => {
         },
       },
     }).then((moboInfos) => {
-      res.status(200).json({
-        Motherboards: moboInfos,
-        moment: moment,
-      });
-    });
-  } catch (error) {
-    res.status(500).json({
-      Message: 'Error fetching data!',
-      Error: error.message,
-    });
-  }
-};
-
-exports.getMoboByDate = (req, res) => {
-  const start = req.body.start;
-  const end = req.body.end;
-  try {
-    console.log(start, end);
-    Motherboad.findAll({
-      order: [['testedDate', 'DESC']],
-      attributes: [
-        'testedDate',
-        'assetId',
-        'macAddress',
-        'tester',
-        'result',
-        'comments',
-      ],
-      where: {
-        testedDate: {
-          [Op.between]: [start, end],
-        },
-      },
-    }).then((moboInfos) => {
-      res.status(200).json({
-        Motherboards: moboInfos,
-      });
+      if (sizeof(req.body) > 1) {
+        console.log(moboInfos);
+        res.render('mobo', {
+          title: 'Motherboards',
+          mobos: moboInfos,
+        });
+      } else {
+        return res.status(200).json({
+          Motherboards: moboInfos,
+        });
+      }
     });
   } catch (error) {
     res.status(500).json({

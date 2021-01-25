@@ -5,7 +5,7 @@ const K2t = db.K2t;
 const K2c = db.K2c;
 const K2x = db.K2x;
 
-// Get all Motherboards on DB
+// Get Especifique Hardware by Serial Number
 exports.searchBySerialNumber = (req, res) => {
   try {
     Motherboad.findAll({
@@ -104,6 +104,40 @@ exports.searchBySerialNumber = (req, res) => {
           search: searchData,
         });
       }
+    });
+  } catch (error) {
+    res.status(500).json({
+      Message: 'Error fetching data!',
+      Error: error.message,
+    });
+  }
+};
+
+exports.getMoboByDate = (req, res) => {
+  const start = req.body.start;
+  const end = req.body.end;
+  try {
+    console.log(start, end);
+    Motherboad.findAll({
+      order: [['testedDate', 'DESC']],
+      attributes: [
+        'testedDate',
+        'assetId',
+        'macAddress',
+        'tester',
+        'result',
+        'comments',
+      ],
+      where: {
+        testedDate: {
+          [Op.between]: [start, end],
+        },
+      },
+    }).then((moboInfos) => {
+      res.render('search', {
+        title: 'Manoel',
+        search: moboInfos,
+      });
     });
   } catch (error) {
     res.status(500).json({

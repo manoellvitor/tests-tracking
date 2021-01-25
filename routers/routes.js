@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 const moment = require('moment');
+const sizeof = require('object-sizeof');
 
 const moboController = require('../controllers/moboController');
 const dimmController = require('../controllers/dimmController');
@@ -22,7 +23,6 @@ router.get('/mobos', async (req, res) => {
         res.render('mobo', {
           title: 'Motherboards',
           mobos: mobosAPI.data.Motherboards,
-          moment: moment,
         });
       });
   } catch (error) {
@@ -96,10 +96,6 @@ router.get('/dimms', async (req, res) => {
 
 router.get('/api/v1.0/getallmotherboards', moboController.getAllMotherboards);
 
-router.post('/api/v1.0/getallmotherboards', moboController.getAllMotherboards);
-
-router.post('/api/v1.0/getmobobydate', moboController.getMoboByDate);
-
 router.get('/api/v1.0/getalldimms', dimmController.getAllDimms);
 
 router.get('/api/v1.0/getallk2ts', k2tController.getAllK2ts);
@@ -110,6 +106,10 @@ router.get('/api/v1.0/getallk2xs', k2xController.getAllK2xs);
 
 router.post('/api/v1.0/search', async (req, res) => {
   await searchController.searchBySerialNumber(req, res);
+});
+
+router.post('/api/v1.0/getMoboByDate', async (req, res) => {
+  await searchController.getMoboByDate(req, res);
 });
 
 module.exports = router;
