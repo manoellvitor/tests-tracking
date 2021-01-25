@@ -96,6 +96,8 @@ router.get('/dimms', async (req, res) => {
 
 router.get('/api/v1.0/getallmotherboards', moboController.getAllMotherboards);
 
+router.post('/api/v1.0/getallmotherboards', moboController.getAllMotherboards);
+
 router.post('/api/v1.0/getmobobydate', moboController.getMoboByDate);
 
 router.get('/api/v1.0/getalldimms', dimmController.getAllDimms);

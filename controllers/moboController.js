@@ -3,9 +3,21 @@ const moment = require('moment');
 const Motherboad = db.Motherboard;
 const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
+const sizeof = require('object-sizeof');
 
 // Get all Motherboards on DB
 exports.getAllMotherboards = (req, res) => {
+  let start;
+  let end;
+  console.log(sizeof(req.body));
+  if (req.body.start > 1) {
+    console.log(req.body);
+    start = req.body.start;
+    end = req.body.end;
+  } else {
+    start = '1990-01-01';
+    end = '3000-01-01';
+  }
   try {
     Motherboad.findAll({
       order: [['testedDate', 'DESC']],
@@ -17,6 +29,11 @@ exports.getAllMotherboards = (req, res) => {
         'result',
         'comments',
       ],
+      where: {
+        testedDate: {
+          [Op.between]: [start, end],
+        },
+      },
     }).then((moboInfos) => {
       res.status(200).json({
         Motherboards: moboInfos,

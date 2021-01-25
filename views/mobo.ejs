@@ -55,7 +55,7 @@
             opens: 'left',
           },
           function (start, end, label) {
-            axios.post('/api/v1.0/getmobobydate', {
+            axios.post('/api/v1.0/getallmotherboards', {
               start: start.format('YYYY-MM-DD'),
               end: end.format('YYYY-MM-DD'),
             });
