@@ -73,9 +73,9 @@ exports.getMoboByDate = (req, res) => {
         },
       },
     }).then((moboInfos) => {
-      res.render('search', {
-        title: 'Manoel',
-        search: moboInfos,
+      res.render('mobo', {
+        title: 'Motherboards',
+        mobos: moboInfos,
       });
     });
   } catch (error) {
