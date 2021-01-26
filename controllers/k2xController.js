@@ -26,7 +26,6 @@ exports.getK2xByDate = (req, res) => {
   const start = req.body.start;
   const end = req.body.end;
   try {
-    console.log(start, end);
     K2x.findAll({
       order: [['testedDate', 'DESC']],
       attributes: ['testedDate', 'assetId', 'tester', 'result', 'comments'],

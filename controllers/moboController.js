@@ -56,7 +56,6 @@ exports.getMoboByDate = (req, res) => {
   const start = req.body.start;
   const end = req.body.end;
   try {
-    console.log(start, end);
     Motherboad.findAll({
       order: [['testedDate', 'DESC']],
       attributes: [

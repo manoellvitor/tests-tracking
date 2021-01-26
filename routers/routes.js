@@ -116,4 +116,12 @@ router.post('/api/v1.0/getK2xByDate', async (req, res) => {
   await k2xController.getK2xByDate(req, res);
 });
 
+router.post('/api/v1.0/getK2tByDate', async (req, res) => {
+  await k2tController.getK2tByDate(req, res);
+});
+
+router.post('/api/v1.0/getK2cByDate', async (req, res) => {
+  await k2cController.getK2cByDate(req, res);
+});
+
 module.exports = router;
