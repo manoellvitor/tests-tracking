@@ -124,4 +124,8 @@ router.post('/api/v1.0/getK2cByDate', async (req, res) => {
   await k2cController.getK2cByDate(req, res);
 });
 
+router.post('/api/v1.0/getDimmByDate', async (req, res) => {
+  await dimmController.getDimmByDate(req, res);
+});
+
 module.exports = router;

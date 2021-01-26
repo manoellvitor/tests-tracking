@@ -34,5 +34,40 @@
     </main>
     <%- include("./_footer.ejs") %>
     <script src="/js/exportDataToExcel.js"></script>
+
+    <!-- Datapicker -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"
+    />
+    <script>
+      $(function () {
+        $('input[name="start"]').daterangepicker({
+          opens: 'left',
+          autoApply: true,
+          singleDatePicker: true,
+          showDropdowns: true,
+          minYear: 2017,
+        });
+      });
+      $(function () {
+        $('input[name="end"]').daterangepicker({
+          opens: 'left',
+          autoApply: true,
+          singleDatePicker: true,
+          showDropdowns: true,
+          minYear: 2017,
+        });
+      });
+    </script>
   </body>
 </html>
