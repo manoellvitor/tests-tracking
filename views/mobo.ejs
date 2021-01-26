@@ -48,20 +48,25 @@
       type="text/css"
       href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"
     />
-    <!-- <script>
+    <script>
       $(function () {
-        $('input[name="daterange"]').daterangepicker(
-          {
-            opens: 'left',
-          },
-          function (start, end, label) {
-            axios.post('/api/v1.0/getMoboByDate', {
-              start: start.format('YYYY-MM-DD'),
-              end: end.format('YYYY-MM-DD'),
-            });
-          },
-        );
+        $('input[name="start"]').daterangepicker({
+          opens: 'left',
+          autoApply: true,
+          singleDatePicker: true,
+          showDropdowns: true,
+          minYear: 2017,
+        });
       });
-    </script> -->
+      $(function () {
+        $('input[name="end"]').daterangepicker({
+          opens: 'left',
+          autoApply: true,
+          singleDatePicker: true,
+          showDropdowns: true,
+          minYear: 2017,
+        });
+      });
+    </script>
   </body>
 </html>
