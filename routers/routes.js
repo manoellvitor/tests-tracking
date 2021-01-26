@@ -109,7 +109,7 @@ router.post('/api/v1.0/search', async (req, res) => {
 });
 
 router.post('/api/v1.0/getMoboByDate', async (req, res) => {
-  await searchController.getMoboByDate(req, res);
+  await moboController.getMoboByDate(req, res);
 });
 
 module.exports = router;

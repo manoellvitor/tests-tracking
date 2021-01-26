@@ -51,3 +51,37 @@ exports.getAllMotherboards = (req, res) => {
     });
   }
 };
+
+exports.getMoboByDate = (req, res) => {
+  const start = req.body.start;
+  const end = req.body.end;
+  try {
+    console.log(start, end);
+    Motherboad.findAll({
+      order: [['testedDate', 'DESC']],
+      attributes: [
+        'testedDate',
+        'assetId',
+        'macAddress',
+        'tester',
+        'result',
+        'comments',
+      ],
+      where: {
+        testedDate: {
+          [Op.between]: [start, end],
+        },
+      },
+    }).then((moboInfos) => {
+      res.render('search', {
+        title: 'Manoel',
+        search: moboInfos,
+      });
+    });
+  } catch (error) {
+    res.status(500).json({
+      Message: 'Error fetching data!',
+      Error: error.message,
+    });
+  }
+};
