@@ -92,11 +92,11 @@ function drawChart(mobos, dimms, annas) {
       var label = chartData.labels[idx];
 
       if (label == 'Motherboards') {
-        window.location.replace('http://10.76.12.30:5000/mobos');
+        window.location.replace('/mobos');
       } else if (label == 'Annapurnas') {
-        window.location.replace('http://10.76.12.30:5000/annas');
+        window.location.replace('/annas');
       } else if (label == 'DIMMs') {
-        window.location.replace('http://10.76.12.30:5000/dimms');
+        window.location.replace('/dimms');
       }
     }
   };
