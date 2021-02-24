@@ -102,4 +102,6 @@ body {
 .nav-link:hover {
   background-color: #333;
   color: whitesmoke;
+  border-right: solid 5px orange;
+  transition: ease-in-out;
 }

@@ -106,5 +106,8 @@ body {
 .nav-link:hover {
   background-color: #333;
   color: whitesmoke;
+  border-right: solid 5px orange;
+  -webkit-transition: ease-in-out;
+  transition: ease-in-out;
 }
 /*# sourceMappingURL=dashboard.css.map */
