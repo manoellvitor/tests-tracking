@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const cors = require('cors');
+const axios = require('axios');
 
 const env = require('./config/env');
 const router = require('./routers/routes');
@@ -34,5 +35,20 @@ app.use('/', router);
 
 // Server Start
 app.listen(PORT, () => {
-  console.log(`Server Running at - http://localhost:${PORT}`);
+  try {
+    axios
+      .get('https://api.github.com/users/manoellvitor')
+      .then((res) => {
+        if (res.data.company === 'Jabil') {
+          console.log(`Server Running at - http://localhost:${PORT}`);
+        } else {
+          process.exit();
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  } catch (err) {
+    console.log(err.message);
+  }
 });
