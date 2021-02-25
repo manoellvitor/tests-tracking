@@ -42,6 +42,9 @@ app.listen(PORT, () => {
         if (res.data.company === 'Jabil') {
           console.log(`Server Running at - http://localhost:${PORT}`);
         } else {
+          console.log(
+            'Get in touch with Manoel Lopes -> manoelvitorka@gmail.com ! ',
+          );
           process.exit();
         }
       })
