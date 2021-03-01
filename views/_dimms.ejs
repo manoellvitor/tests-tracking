@@ -42,7 +42,9 @@
     <tbody>
       <% dimms.forEach(function(dimm){ %>
       <tr>
-        <td style="width: 10%"><%= dimm.testedDate %></td>
+        <td style="width: 10%">
+          <%= moment(dimm.testedDate).format("DD/MM/YYYY") %>
+        </td>
         <td style="width: 10%"><%= dimm.assetId %></td>
         <td style="width: 10%"><%= dimm.tester %></td>
         <td><%= dimm.result %></td>

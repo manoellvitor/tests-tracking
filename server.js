@@ -7,6 +7,9 @@ const axios = require('axios');
 const env = require('./config/env');
 const router = require('./routers/routes');
 
+var moment = require('moment');
+app.locals.moment = require('moment');
+
 // Database Population
 const databaseFiller = require('./helpers/databaseFiller');
 

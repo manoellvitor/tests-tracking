@@ -29,7 +29,7 @@
     <tbody>
       <% search.forEach(function(search){ %>
       <tr>
-        <td><%= search.testedDate %></td>
+        <td><%= moment(search.testedDate).format("DD/MM/YYYY") %></td>
         <td><%= search.assetId %></td>
         <td><%= search.macAddress %></td>
         <td><%= search.tester %></td>

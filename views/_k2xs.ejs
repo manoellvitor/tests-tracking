@@ -42,7 +42,9 @@
     <tbody>
       <% k2xs.forEach(function(k2x){ %>
       <tr>
-        <td style="width: 10%"><%= k2x.testedDate %></td>
+        <td style="width: 10%">
+          <%= moment(k2x.testedDate).format("DD/MM/YYYY") %>
+        </td>
         <td style="width: 10%"><%= k2x.assetId %></td>
         <td style="width: 10%"><%= k2x.tester %></td>
         <td><%= k2x.result %></td>

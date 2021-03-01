@@ -43,7 +43,9 @@
     <tbody>
       <% mobos.forEach(function(mobo){ %>
       <tr>
-        <td style="width: 10%"><%= mobo.testedDate %></td>
+        <td style="width: 10%">
+          <%= moment(mobo.testedDate).format("DD/MM/YYYY") %>
+        </td>
         <td style="width: 10%"><%= mobo.assetId %></td>
         <td style="width: 10%"><%= mobo.macAddress %></td>
         <td style="width: 10%"><%= mobo.tester %></td>
