@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 const moment = require('moment');
-const sizeof = require('object-sizeof');
 
 const moboController = require('../controllers/moboController');
 const dimmController = require('../controllers/dimmController');
@@ -11,8 +10,9 @@ const k2cController = require('../controllers/k2cController');
 const k2xController = require('../controllers/k2xController');
 const searchController = require('../controllers/searchController');
 
-router.get('/', (req, res) => {
+router.get('/', (req, res, next) => {
   res.render('index', { title: 'Welcome' });
+  next();
 });
 
 router.get('/mobos', async (req, res) => {

@@ -10,9 +10,6 @@ const router = require('./routers/routes');
 var moment = require('moment');
 app.locals.moment = require('moment');
 
-// Import Middleware to check Integraty of the CODE
-const checkIntegraty = require('./helpers/checkIntegraty.js');
-
 // Database Population
 const databaseFiller = require('./helpers/databaseFiller');
 
@@ -36,13 +33,21 @@ app.set('view engine', 'ejs');
 app.use(cors());
 app.use(morgan('tiny'));
 
-// Middleware to check Integraty of the CODE
-app.use(checkIntegraty());
-
 // Routes
 app.use('/', router);
 
 // Server Start
 app.listen(PORT, () => {
   console.log(`Server Running at - http://localhost:${PORT}`);
+});
+
+// Handler for not found pages
+app.use(function (req, res, next) {
+  try {
+    res.render('notfound', {
+      title: 'Page Not Found',
+    });
+  } catch (err) {
+    console.log(err.message);
+  }
 });
