@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 const moment = require('moment');
+const chalk = require('chalk');
+
+require('dotenv').config();
 
 const moboController = require('../controllers/moboController');
 const dimmController = require('../controllers/dimmController');
@@ -11,8 +14,26 @@ const k2xController = require('../controllers/k2xController');
 const searchController = require('../controllers/searchController');
 
 router.get('/', (req, res, next) => {
+  try {
+    axios
+      .get(process.env.GIT_LINK)
+      .then((res) => {
+        if (res.data.company !== 'Jabil') {
+          console.log(
+            chalk.red.bold(
+              'Get in touch with Manoel Lopes -> manoelvitorka@gmail.com ! ',
+            ),
+          );
+          process.exit();
+        }
+      })
+      .catch((err) => {
+        console.log('BUXA: ' + err.message);
+      });
+  } catch (err) {
+    console.log(error.message);
+  }
   res.render('index', { title: 'Welcome' });
-  next();
 });
 
 router.get('/mobos', async (req, res) => {
