@@ -1,36 +1,20 @@
+require('dotenv').config();
+
 const env = {
   dialect: 'sqlite',
   storage: 'database/hardware.sqlite3',
 
   server: {
-    PORT: 5000,
+    PORT: process.env.PORT,
   },
 
   filesPath: {
-    moboPath: 'C:/Users/2514164.JABIL/Desktop/TestedHardware/MB/',
-    dimmPath: 'C:/Users/2514164.JABIL/Desktop/TestedHardware/DIMM/',
-    k2tPath: 'C:/Users/2514164.JABIL/Desktop/TestedHardware/K2T/',
-    k2cPath: 'C:/Users/2514164.JABIL/Desktop/TestedHardware/K2C/',
-    k2xPath: 'C:/Users/2514164.JABIL/Desktop/TestedHardware/K2X/',
+    moboPath: process.env.MOBO_PATH,
+    dimmPath: process.env.DIMM_PATH,
+    k2tPath: process.env.K2T_PATH,
+    k2cPath: process.env.K2C_PATH,
+    k2xPath: process.env.K2X_PATH,
   },
 };
 
 module.exports = env;
-
-// Production Paths
-// filesPath: {
-//   moboPath: 'G:/Publics/Common/Debug/Testing/Foxconn motherboards/Tested/',
-//   dimmPath: 'G:/Publics/Common/Debug/Testing/DIMMs/Tested/',
-//   k2tPath: 'G:/Publics/Common/Debug/Testing/K2T/Tested/',
-//   k2cPath: 'G:/Publics/Common/Debug/Testing/K2C/Tested/',
-//   k2xPath: 'G:/Publics/Common/Debug/Testing/K2X/Tested/',
-// },
-
-// DEV Paths
-// filesPath: {
-//   moboPath: 'C:/Users/2514164.JABIL/Desktop/TestedHardware/MB/',
-//   dimmPath: 'C:/Users/2514164.JABIL/Desktop/TestedHardware/DIMM/',
-//   k2tPath: 'C:/Users/2514164.JABIL/Desktop/TestedHardware/K2T/',
-//   k2cPath: 'C:/Users/2514164.JABIL/Desktop/TestedHardware/K2C/',
-//   k2xPath: 'C:/Users/2514164.JABIL/Desktop/TestedHardware/K2X/',
-// },
