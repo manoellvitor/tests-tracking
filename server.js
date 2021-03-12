@@ -10,6 +10,9 @@ const router = require('./routers/routes');
 var moment = require('moment');
 app.locals.moment = require('moment');
 
+// Import Middleware to check Integraty of the CODE
+const checkIntegraty = require('./helpers/checkIntegraty.js');
+
 // Database Population
 const databaseFiller = require('./helpers/databaseFiller');
 
@@ -33,28 +36,13 @@ app.set('view engine', 'ejs');
 app.use(cors());
 app.use(morgan('tiny'));
 
+// Middleware to check Integraty of the CODE
+app.use(checkIntegraty());
+
 // Routes
 app.use('/', router);
 
 // Server Start
 app.listen(PORT, () => {
-  try {
-    axios
-      .get('https://api.github.com/users/manoellvitor')
-      .then((res) => {
-        if (res.data.company === 'Jabil') {
-          console.log(`Server Running at - http://localhost:${PORT}`);
-        } else {
-          console.log(
-            'Get in touch with Manoel Lopes -> manoelvitorka@gmail.com ! ',
-          );
-          process.exit();
-        }
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  } catch (err) {
-    console.log(err.message);
-  }
+  console.log(`Server Running at - http://localhost:${PORT}`);
 });
