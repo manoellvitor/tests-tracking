@@ -28,9 +28,6 @@
     "url": "https://github.com/manoellvitor/jabil-hardware/issues"
   },
   "homepage": "https://github.com/manoellvitor/jabil-hardware#readme",
-  "devDependencies": {
-    "nodemon": "^2.0.6"
-  },
   "dependencies": {
     "axios": "^0.21.1",
     "cors": "^2.8.5",
