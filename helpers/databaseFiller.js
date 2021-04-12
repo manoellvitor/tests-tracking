@@ -325,7 +325,7 @@ if (flag == 1) {
   flag = 0;
 }
 
-setInterval(() => {
-  getMoboData();
-  checkIntegrity();
+setInterval(async () => {
+  await getMoboData();
+  await checkIntegrity();
 }, 1800000);
