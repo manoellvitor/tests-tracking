@@ -37,6 +37,18 @@
     </main>
     <%- include("./_footer.ejs") %>
     <script src="/js/exportDataToExcel.js"></script>
+    <!-- Table -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.24/datatables.min.css"
+    />
+
+    <script
+      type="text/javascript"
+      src="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.24/datatables.min.js"
+    ></script>
+
     <!-- Datapicker -->
     <script
       type="text/javascript"
@@ -69,6 +81,12 @@
           showDropdowns: true,
           minYear: 2017,
         });
+      });
+    </script>
+
+    <script>
+      jQuery(document).ready(function ($) {
+        $('#table').DataTable();
       });
     </script>
   </body>
