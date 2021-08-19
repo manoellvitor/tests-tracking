@@ -9,12 +9,14 @@ const Dimm = db.Dimm;
 const K2t = db.K2t;
 const K2c = db.K2c;
 const K2x = db.K2x;
+const Ssd = db.Ssd;
 
 const mobosPath = env.filesPath.moboPath;
 const dimmPath = env.filesPath.dimmPath;
 const k2tPath = env.filesPath.k2tPath;
 const k2cPath = env.filesPath.k2cPath;
 const k2xPath = env.filesPath.k2xPath;
+const ssdPath = env.filesPath.ssdPath;
 
 let flag = 1;
 
@@ -296,6 +298,61 @@ function getK2xData() {
                     }
                     try {
                       K2x.create(k2x);
+                    } catch (error) {
+                      console.log('Error:' + error.message);
+                    }
+                  });
+                });
+              }
+            } catch (error) {
+              console.log('Error:' + error.message);
+            }
+          });
+          getSsdData();
+        } catch (error) {
+          console.log('Error: ' + error.message);
+        }
+      }
+    });
+  } catch (error) {
+    console.log('Error: ' + error.message);
+  }
+}
+
+// Get all the Excel files of SSDs
+function getSsdData() {
+  try {
+    fs.readdir(ssdPath, (err, files) => {
+      if (err) {
+        return console.log('Unable to ready directory:' + err.message);
+      } else if (!files.length) {
+        return console.log('Empty Directory');
+      } else {
+        try {
+          // fillDimmData(files, dimmPath);
+          Ssd.sync({ force: true }).then(() => {
+            try {
+              for (i = 0; i < files.length; i++) {
+                xlsxFile(ssdPath + files[i]).then((rows) => {
+                  rows.shift();
+                  rows.forEach((data) => {
+                    let ssd = {};
+                    try {
+                      ssd.addedDate = data[0];
+                      ssd.assetId = data[1];
+                      ssd.testedDate = data[2];
+                      ssd.result = data[3];
+                      ssd.tester = data[4];
+                      ssd.mrb = data[5];
+                      ssd.comments = data[6];
+                    } catch (error) {
+                      res.status(500).json({
+                        Message: 'FAIL... Something wen wrong!',
+                        Error: error.message,
+                      });
+                    }
+                    try {
+                      Ssd.create(ssd);
                     } catch (error) {
                       console.log('Error:' + error.message);
                     }

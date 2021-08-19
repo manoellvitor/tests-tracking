@@ -18,53 +18,63 @@ function getDimms() {
   return axios.get('/api/v1.0/getalldimms');
 }
 
-Promise.all([getMobos(), getDimms(), getK2ts(), getK2cs(), getK2xs()]).then(
-  function (results) {
-    const mobos = results[0];
-    const dimms = results[1];
-    const k2ts = results[2];
-    const k2cs = results[3];
-    const k2xs = results[4];
-    const annas =
-      Object.keys(k2ts.data.K2ts).length +
-      Object.keys(k2cs.data.K2cs).length +
-      Object.keys(k2xs.data.K2xs).length;
+function getSsds() {
+  return axios.get('/api/v1.0/getallssds');
+}
 
-    drawChart(
-      Object.keys(mobos.data.Motherboards).length,
-      Object.keys(dimms.data.Dimms).length,
-      annas,
-    );
-    drawChartBar(
-      mobos.data.Motherboards,
-      dimms.data.Dimms,
-      k2ts.data.K2ts,
-      k2cs.data.K2cs,
-      k2xs.data.K2xs,
-    );
-  },
-);
+Promise.all([
+  getMobos(),
+  getDimms(),
+  getK2ts(),
+  getK2cs(),
+  getK2xs(),
+  getSsds(),
+]).then(function (results) {
+  const mobos = results[0];
+  const dimms = results[1];
+  const k2ts = results[2];
+  const k2cs = results[3];
+  const k2xs = results[4];
+  const ssds = results[5];
+  const annas =
+    Object.keys(k2ts.data.K2ts).length +
+    Object.keys(k2cs.data.K2cs).length +
+    Object.keys(k2xs.data.K2xs).length;
 
-function drawChart(mobos, dimms, annas) {
+  drawChart(
+    Object.keys(mobos.data.Motherboards).length,
+    Object.keys(dimms.data.Dimms).length,
+    Object.keys(ssds.data.Ssds).length,
+    annas,
+  );
+  drawChartBar(
+    mobos.data.Motherboards,
+    dimms.data.Dimms,
+    k2ts.data.K2ts,
+    k2cs.data.K2cs,
+    k2xs.data.K2xs,
+    ssds.data.Ssds,
+  );
+});
+
+function drawChart(mobos, dimms, ssds, annas) {
   var canvas = document.getElementById('totalHardwareChart');
   var ctx = document.getElementById('totalHardwareChart').getContext('2d');
   var totalHardwareChart = new Chart(ctx, {
     type: 'pie',
     data: {
-      labels: ['Motherboards', 'Annapurnas', 'DIMMs', 'CPUs', 'FANs'],
+      labels: ['Motherboards', 'Annapurnas', 'DIMMs', 'SSDs'],
       datasets: [
         {
           label: 'Hardware Tested',
-          data: [mobos, annas, dimms, 800, 700],
+          data: [mobos, annas, dimms, ssds],
           backgroundColor: [
             'rgba(255, 99, 132, 1)',
             'rgba(54, 162, 235, 1)',
             'rgba(255, 159, 64, 1)',
             'rgba(75, 192, 192, 1)',
-            'rgba(153, 102, 255, 1)',
           ],
           borderColor: [
-            'rgba(0, 0, 0, 255)',
             'rgba(0, 0, 0, 255)',
             'rgba(0, 0, 0, 255)',
             'rgba(0, 0, 0, 255)',
@@ -97,12 +107,14 @@ function drawChart(mobos, dimms, annas) {
         window.location.replace('/annas');
       } else if (label == 'DIMMs') {
         window.location.replace('/dimms');
+      } else if (label == 'SSDs') {
+        window.location.replace('/ssds');
       }
     }
   };
 }
 
-function drawChartBar(mobos, dimms, k2ts, k2cs, k2xs) {
+function drawChartBar(mobos, dimms, k2ts, k2cs, k2xs, ssds) {
   let moboFail = 0;
   let moboPass = 0;
   let dimmFail = 0;
@@ -116,6 +128,9 @@ function drawChartBar(mobos, dimms, k2ts, k2cs, k2xs) {
 
   let annasFail = 0;
   let annasPass = 0;
+
+  let ssdFail = 0;
+  let ssdPass = 0;
 
   mobos.forEach((mobo) => {
     if (
@@ -138,6 +153,18 @@ function drawChartBar(mobos, dimms, k2ts, k2cs, k2xs) {
       dimmFail++;
     } else if (dimm.result == 'Pass') {
       dimmPass++;
+    }
+  });
+
+  ssds.forEach((ssd) => {
+    if (
+      ssd.result == 'Fail' ||
+      ssd.result == 'Faild' ||
+      ssd.result == 'Fail Test'
+    ) {
+      ssdFail++;
+    } else if (ssd.result == 'Pass') {
+      ssdPass++;
     }
   });
 
@@ -193,7 +220,7 @@ function drawChartBar(mobos, dimms, k2ts, k2cs, k2xs) {
   var FailAndPass = new Chart(ctx, {
     type: 'bar',
     data: {
-      labels: ['Motherboards', 'Annapurnas', 'DIMMs', 'CPUs', 'FANs'],
+      labels: ['Motherboards', 'Annapurnas', 'DIMMs', 'SSDs'],
       datasets: [
         {
           label: 'Fail',
@@ -202,17 +229,15 @@ function drawChartBar(mobos, dimms, k2ts, k2cs, k2xs) {
             'rgba(255, 0, 0, 1)',
             'rgba(255, 0, 0, 1)',
             'rgba(255, 0, 0, 1)',
-            'rgba(255, 0, 0, 1)',
           ],
           borderColor: [
             'rgba(0, 0, 0, 255)',
             'rgba(0, 0, 0, 255)',
             'rgba(0, 0, 0, 255)',
             'rgba(0, 0, 0, 255)',
-            'rgba(0, 0, 0, 255)',
           ],
           borderWidth: 1,
-          data: [moboFail, annasFail, dimmFail, 800, 700],
+          data: [moboFail, annasFail, dimmFail, ssdFail],
         },
         {
           label: 'Pass',
@@ -221,17 +246,15 @@ function drawChartBar(mobos, dimms, k2ts, k2cs, k2xs) {
             'rgba(0, 255, 0, 1)',
             'rgba(0, 255, 0, 1)',
             'rgba(0, 255, 0, 1)',
-            'rgba(0, 255, 0, 1)',
           ],
           borderColor: [
             'rgba(0, 0, 0, 255)',
             'rgba(0, 0, 0, 255)',
             'rgba(0, 0, 0, 255)',
             'rgba(0, 0, 0, 255)',
-            'rgba(0, 0, 0, 255)',
           ],
           borderWidth: 1,
-          data: [moboPass, annasPass, dimmPass, 370, 256],
+          data: [moboPass, annasPass, dimmPass, ssdPass],
         },
       ],
     },

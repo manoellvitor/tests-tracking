@@ -21,5 +21,6 @@ db.Dimm = require('../models/Dimm')(sequelize, Sequelize);
 db.K2t = require('../models/K2t')(sequelize, Sequelize);
 db.K2c = require('../models/K2c')(sequelize, Sequelize);
 db.K2x = require('../models/K2x')(sequelize, Sequelize);
+db.Ssd = require('../models/Ssd')(sequelize, Sequelize);
 
 module.exports = db;

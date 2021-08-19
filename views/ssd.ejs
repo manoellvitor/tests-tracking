@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="shortcut icon" href="images/favicon.ico" />
+
+    <title><%- title %> | Tested Hardware - JABIL</title>
+
+    <!-- Font awesome core CSS -->
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+
+    <!-- Bootstrap core CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
+      crossorigin="anonymous"
+    />
+
+    <!-- Custom styles for this template -->
+    <link href="/css/dashboard.css" rel="stylesheet" />
+
+    <!-- Save table to EXCEL-->
+    <script src="https://cdn.jsdelivr.net/gh/linways/table-to-excel@v1.0.4/dist/tableToExcel.js"></script>
+  </head>
+  <body>
+    <%- include("./_header.ejs") %>
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+      <%- include("./_ssds.ejs") %>
+    </main>
+    <%- include("./_footer.ejs") %>
+    <script src="/js/exportDataToExcel.js"></script>
+
+    <!-- Table -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.24/datatables.min.css"
+    />
+
+    <script
+      type="text/javascript"
+      src="https://cdn.datatables.net/v/dt/jq-3.3.1/dt-1.10.24/datatables.min.js"
+    ></script>
+
+    <!-- Datapicker -->
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"
+    ></script>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css"
+    />
+    <script>
+      $(function () {
+        $('input[name="start"]').daterangepicker({
+          opens: 'left',
+          autoApply: true,
+          singleDatePicker: true,
+          showDropdowns: true,
+          minYear: 2017,
+        });
+      });
+      $(function () {
+        $('input[name="end"]').daterangepicker({
+          opens: 'left',
+          autoApply: true,
+          singleDatePicker: true,
+          showDropdowns: true,
+          minYear: 2017,
+        });
+      });
+    </script>
+
+    <script>
+      jQuery(document).ready(function ($) {
+        $('#table').DataTable({
+          order: [],
+          paging: false,
+        });
+      });
+    </script>
+  </body>
+</html>

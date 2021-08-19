@@ -4,6 +4,7 @@ const Dimm = db.Dimm;
 const K2t = db.K2t;
 const K2c = db.K2c;
 const K2x = db.K2x;
+const Ssd = db.Ssd;
 
 // Get Especifique Hardware by Serial Number
 exports.searchBySerialNumber = (req, res) => {
@@ -42,15 +43,30 @@ exports.searchBySerialNumber = (req, res) => {
                               },
                             }).then((searchData) => {
                               if (searchData == '') {
-                                res.render('search', {
-                                  title: 'Search Result',
-                                  search: searchData,
-                                });
-                              } else {
-                                res.render('search', {
-                                  title: 'Search Result',
-                                  search: searchData,
-                                });
+                                try {
+                                  Ssd.findAll({
+                                    where: {
+                                      assetId: req.body.search,
+                                    },
+                                  }).then((searchData) => {
+                                    if (searchData == '') {
+                                      res.json({
+                                        status: 'error',
+                                        message: 'No results found',
+                                      });
+                                    } else {
+                                      res.render('search', {
+                                        title: 'Search Result',
+                                        search: searchData,
+                                      });
+                                    }
+                                  });
+                                } catch (err) {
+                                  res.json({
+                                    status: 'error',
+                                    message: 'No results found',
+                                  });
+                                }
                               }
                             });
                           } catch (error) {

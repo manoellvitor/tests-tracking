@@ -11,6 +11,7 @@ const dimmController = require('../controllers/dimmController');
 const k2tController = require('../controllers/k2tController');
 const k2cController = require('../controllers/k2cController');
 const k2xController = require('../controllers/k2xController');
+const ssdController = require('../controllers/ssdController');
 const searchController = require('../controllers/searchController');
 
 router.get('/', (req, res, next) => {
@@ -96,9 +97,26 @@ router.get('/dimms', async (req, res) => {
   }
 });
 
+router.get('/ssds', async (req, res) => {
+  try {
+    await axios
+      .get('http://localhost:5000/api/v1.0/getallssds')
+      .then((ssdsAPI) => {
+        res.render('ssd', {
+          title: 'SSDs',
+          ssds: ssdsAPI.data.Ssds,
+        });
+      });
+  } catch (error) {
+    console.log(error.message);
+  }
+});
+
 router.get('/api/v1.0/getallmotherboards', moboController.getAllMotherboards);
 
 router.get('/api/v1.0/getalldimms', dimmController.getAllDimms);
+
+router.get('/api/v1.0/getallssds', ssdController.getAllSsds);
 
 router.get('/api/v1.0/getallk2ts', k2tController.getAllK2ts);
 
@@ -128,6 +146,10 @@ router.post('/api/v1.0/getK2cByDate', async (req, res) => {
 
 router.post('/api/v1.0/getDimmByDate', async (req, res) => {
   await dimmController.getDimmByDate(req, res);
+});
+
+router.post('/api/v1.0/getSsdByDate', async (req, res) => {
+  await ssdController.getSsdByDate(req, res);
 });
 
 module.exports = router;
