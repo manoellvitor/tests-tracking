@@ -8,51 +8,58 @@ const Ssd = db.Ssd;
 
 // Get Especifique Hardware by Serial Number
 exports.searchBySerialNumber = (req, res) => {
+  if (req.body.search == '') {
+    return res.render('search', {
+      title: 'Search Result',
+      search: '',
+    });
+  }
+
   try {
     Motherboad.findAll({
       where: {
-        assetId: req.body.search,
+        assetId: req.body.search.trim(),
       },
     }).then((searchData) => {
       if (searchData == '') {
         try {
           Dimm.findAll({
             where: {
-              assetId: req.body.search,
+              assetId: req.body.search.trim(),
             },
           }).then((searchData) => {
             if (searchData == '') {
               try {
                 K2t.findAll({
                   where: {
-                    assetId: req.body.search,
+                    assetId: req.body.search.trim(),
                   },
                 }).then((searchData) => {
                   if (searchData == '') {
                     try {
                       K2c.findAll({
                         where: {
-                          assetId: req.body.search,
+                          assetId: req.body.search.trim(),
                         },
                       }).then((searchData) => {
                         if (searchData == '') {
                           try {
                             K2x.findAll({
                               where: {
-                                assetId: req.body.search,
+                                assetId: req.body.search.trim(),
                               },
                             }).then((searchData) => {
                               if (searchData == '') {
                                 try {
                                   Ssd.findAll({
                                     where: {
-                                      assetId: req.body.search,
+                                      assetId: req.body.search.trim(),
                                     },
                                   }).then((searchData) => {
                                     if (searchData == '') {
-                                      res.json({
-                                        status: 'error',
-                                        message: 'No results found',
+                                      res.render('search', {
+                                        title: 'Search Result',
+                                        search: searchData,
                                       });
                                     } else {
                                       res.render('search', {
@@ -62,11 +69,16 @@ exports.searchBySerialNumber = (req, res) => {
                                     }
                                   });
                                 } catch (err) {
-                                  res.json({
-                                    status: 'error',
-                                    message: 'No results found',
+                                  res.render('search', {
+                                    title: 'Search Result',
+                                    search: searchData,
                                   });
                                 }
+                              } else {
+                                res.render('search', {
+                                  title: 'Search Result',
+                                  search: searchData,
+                                });
                               }
                             });
                           } catch (error) {

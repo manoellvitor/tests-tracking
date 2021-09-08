@@ -36,7 +36,9 @@
       </tr>
     </thead>
     <tbody>
-      <% search.forEach(function(search){ %>
+      <% if (!search) { %>
+      <h3>No data was found!</h3>
+      <%} %> <% if (search) { %> <% search.forEach(function(search){ %>
       <tr>
         <td><%= moment(search.testedDate).format("DD/MM/YYYY") %></td>
         <td><%= search.assetId %></td>
@@ -45,7 +47,7 @@
         <td><%= search.result %></td>
         <td><%= search.comments %></td>
       </tr>
-      <% }) %>
+      <% }) %> <%} %>
     </tbody>
   </table>
 </div>
