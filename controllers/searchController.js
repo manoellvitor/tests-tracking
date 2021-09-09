@@ -18,42 +18,44 @@ exports.searchBySerialNumber = (req, res) => {
   try {
     Motherboad.findAll({
       where: {
-        assetId: req.body.search.trim(),
+        assetId: req.body.search.trim().toUpperCase(),
       },
     }).then((searchData) => {
       if (searchData == '') {
         try {
           Dimm.findAll({
             where: {
-              assetId: req.body.search.trim(),
+              assetId: req.body.search.trim().toUpperCase(),
             },
           }).then((searchData) => {
             if (searchData == '') {
               try {
                 K2t.findAll({
                   where: {
-                    assetId: req.body.search.trim(),
+                    assetId: req.body.search.trim().toUpperCase(),
                   },
                 }).then((searchData) => {
                   if (searchData == '') {
                     try {
                       K2c.findAll({
                         where: {
-                          assetId: req.body.search.trim(),
+                          assetId: req.body.search.trim().toUpperCase(),
                         },
                       }).then((searchData) => {
                         if (searchData == '') {
                           try {
                             K2x.findAll({
                               where: {
-                                assetId: req.body.search.trim(),
+                                assetId: req.body.search.trim().toUpperCase(),
                               },
                             }).then((searchData) => {
                               if (searchData == '') {
                                 try {
                                   Ssd.findAll({
                                     where: {
-                                      assetId: req.body.search.trim(),
+                                      assetId: req.body.search
+                                        .trim()
+                                        .toUpperCase(),
                                     },
                                   }).then((searchData) => {
                                     if (searchData == '') {
