@@ -8,6 +8,9 @@ const Ssd = db.Ssd;
 
 // Get Especifique Hardware by Serial Number
 exports.searchBySerialNumber = (req, res) => {
+  let search = req.body.search.toUpperCase().trim();
+  console.log(search);
+
   if (req.body.search == '') {
     return res.render('search', {
       title: 'Search Result',
@@ -18,35 +21,35 @@ exports.searchBySerialNumber = (req, res) => {
   try {
     Motherboad.findAll({
       where: {
-        assetId: req.body.search.trim().toUpperCase(),
+        assetId: search,
       },
     }).then((searchData) => {
       if (searchData == '') {
         try {
           Dimm.findAll({
             where: {
-              assetId: req.body.search.trim().toUpperCase(),
+              assetId: search,
             },
           }).then((searchData) => {
             if (searchData == '') {
               try {
                 K2t.findAll({
                   where: {
-                    assetId: req.body.search.trim().toUpperCase(),
+                    assetId: search,
                   },
                 }).then((searchData) => {
                   if (searchData == '') {
                     try {
                       K2c.findAll({
                         where: {
-                          assetId: req.body.search.trim().toUpperCase(),
+                          assetId: search,
                         },
                       }).then((searchData) => {
                         if (searchData == '') {
                           try {
                             K2x.findAll({
                               where: {
-                                assetId: req.body.search.trim().toUpperCase(),
+                                assetId: search,
                               },
                             }).then((searchData) => {
                               if (searchData == '') {
