@@ -3,7 +3,8 @@
 ## _Better than Spreadsheets_
 
 ## Description
-  	This application was developed to solve a business issue I was facing while working for a company a while ago. We were using spreadsheets to store all test results and we had no way or any automation to search for previous test results or to know how we were doing as a team based on the results of the tests.
+
+This application was developed to solve a business issue I was facing while working for a company a while ago. We were using spreadsheets to store all test results and we had no way or any automation to search for previous test results or to know how we were doing as a team based on the results of the tests.
 
 ## Features
   - Individual page for each kind of hardware tested.
@@ -39,4 +40,10 @@ cd tests-tracking
 npm i
 node start
 ```
+
+## License
+
+MIT
+
+**Free Software, Hell Yeah!**
 
