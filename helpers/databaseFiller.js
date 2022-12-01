@@ -20,29 +20,6 @@ const ssdPath = env.filesPath.ssdPath;
 
 let flag = 1;
 
-// Check integrity
-const checkIntegrity = async () => {
-  try {
-    axios
-      .get(process.env.GIT_LINK)
-      .then((res) => {
-        if (res.data.company !== 'Jabil') {
-          console.log(
-            chalk.red.bold(
-              'Get in touch with Manoel Lopes -> manoelvitorka@gmail.com ! ',
-            ),
-          );
-          process.exit();
-        }
-      })
-      .catch((err) => {
-        console.log('BUXA: ' + err.message);
-      });
-  } catch (err) {
-    console.log(error.message);
-  }
-};
-
 // Get all the Excel files of Motherboards
 function getMoboData() {
   try {
@@ -384,5 +361,4 @@ if (flag == 1) {
 
 setInterval(async () => {
   await getMoboData();
-  await checkIntegrity();
 }, 1800000);

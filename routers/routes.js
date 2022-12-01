@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
-const moment = require('moment');
-const chalk = require('chalk');
+const env = require('../config/env');
+
 
 require('dotenv').config();
 
@@ -14,6 +14,8 @@ const k2xController = require('../controllers/k2xController');
 const ssdController = require('../controllers/ssdController');
 const searchController = require('../controllers/searchController');
 
+const PORT = env.server.PORT || 5000;
+
 router.get('/', (req, res, next) => {
   res.render('index', { title: 'Welcome' });
 });
@@ -21,7 +23,7 @@ router.get('/', (req, res, next) => {
 router.get('/mobos', async (req, res) => {
   try {
     await axios
-      .get('http://localhost:5000/api/v1.0/getallmotherboards')
+      .get(`http://localhost:${PORT}/api/v1.0/getallmotherboards`)
       .then((mobosAPI) => {
         res.render('mobo', {
           title: 'Motherboards',
@@ -40,7 +42,7 @@ router.get('/annas', async (req, res) => {
 router.get('/k2ts', async (req, res) => {
   try {
     await axios
-      .get('http://localhost:5000/api/v1.0/getallk2ts')
+      .get(`http://localhost:${PORT}/api/v1.0/getallk2ts`)
       .then((k2tsAPI) => {
         res.render('k2t', {
           title: 'K2Ts',
@@ -55,7 +57,7 @@ router.get('/k2ts', async (req, res) => {
 router.get('/k2cs', async (req, res) => {
   try {
     await axios
-      .get('http://localhost:5000/api/v1.0/getallk2cs')
+      .get(`http://localhost:${PORT}/api/v1.0/getallk2cs`)
       .then((k2csAPI) => {
         res.render('k2c', {
           title: 'K2Cs',
@@ -70,7 +72,7 @@ router.get('/k2cs', async (req, res) => {
 router.get('/k2xs', async (req, res) => {
   try {
     await axios
-      .get('http://localhost:5000/api/v1.0/getallk2xs')
+      .get(`http://localhost:${PORT}/api/v1.0/getallk2xs`)
       .then((k2xsAPI) => {
         res.render('k2x', {
           title: 'K2Xs',
@@ -85,7 +87,7 @@ router.get('/k2xs', async (req, res) => {
 router.get('/dimms', async (req, res) => {
   try {
     await axios
-      .get('http://localhost:5000/api/v1.0/getalldimms')
+      .get(`http://localhost:${PORT}/api/v1.0/getalldimms`)
       .then((dimmsAPI) => {
         res.render('dimm', {
           title: 'DIMMs',
@@ -100,7 +102,7 @@ router.get('/dimms', async (req, res) => {
 router.get('/ssds', async (req, res) => {
   try {
     await axios
-      .get('http://localhost:5000/api/v1.0/getallssds')
+      .get(`http://localhost:${PORT}/api/v1.0/getallssds`)
       .then((ssdsAPI) => {
         res.render('ssd', {
           title: 'SSDs',

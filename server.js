@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const cors = require('cors');
-const axios = require('axios');
 
 const env = require('./config/env');
 const router = require('./routers/routes');
@@ -29,7 +28,7 @@ app.use('/js', express.static(__dirname + 'resources/js'));
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
-// Midleware
+// Middleware
 app.use(cors());
 app.use(morgan('tiny'));
 
