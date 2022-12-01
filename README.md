@@ -1,6 +1,9 @@
-# Tests Tracking
+<h1 align="center">Tests Tracking</h1>
+<p align="center">  
+  <img src="https://user-images.githubusercontent.com/20465169/205035002-176ace79-8760-49ea-b68e-99b977e17723.png" />
+</p>
 
-## _Better than Spreadsheets_
+### _Better than Spreadsheets_
 
 ## Description
 
