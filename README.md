@@ -11,9 +11,6 @@ Application to get all data from Excel Sheets and show it in a user friendly way
 
 # DEMO
 
-![Dashboard Home Page](https://i.imgur.com/6U9Y5Xn.png)
 
-![Hardware Page - Motherboard](https://i.imgur.com/xVwMCbr.png)
-
-![Search Page](https://i.imgur.com/aJ97I5X.png)
+https://user-images.githubusercontent.com/20465169/205028222-39efcb62-6928-4b0b-bd03-2b650ce9ec1f.mp4
 
