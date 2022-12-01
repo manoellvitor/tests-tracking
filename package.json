@@ -1,15 +1,11 @@
 {
-  "name": "jabil-hardware",
+  "name": "tests-tracking",
   "version": "1.0.0",
   "description": "Application to get all data from Excel Sheets and show it in a user friendly way",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/manoellvitor/jabil-hardware.git"
   },
   "keywords": [
     "Nodejs",
@@ -22,12 +18,8 @@
     "Bootstrap",
     "framework"
   ],
-  "author": "Manoel Vitor Nascimento Lopes",
+  "author": "Manoel Lopes",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/manoellvitor/jabil-hardware/issues"
-  },
-  "homepage": "https://github.com/manoellvitor/jabil-hardware#readme",
   "dependencies": {
     "axios": "^0.21.1",
     "cors": "^2.8.5",
