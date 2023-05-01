@@ -7,7 +7,7 @@
 
 ## Description
 
-This application was developed to solve a business issue I was facing while working for a company a while ago. We were using spreadsheets to store all test results and we had no way or any automation to search for previous test results or to know how we were doing as a team based on the results of the tests.
+This web application was created to address a critical business challenge I encountered during my previous employment. At the time, our team relied on spreadsheets to store and manage test results. This approach lacked automation and made it difficult to track our progress over time or retrieve specific test results. As a solution, I developed this application using modern web technologies to enable easy and automated storage, search, and retrieval of test results. With this tool, businesses can better manage their test results, evaluate their team's performance, and drive improvements across the board.
 
 ## Features
   - Individual page for each kind of hardware tested.
